@@ -1,0 +1,11 @@
+ul, li 
+	{
+		list-style-type: none;
+		display: inline-block;
+		float: left;
+	}
+
+img
+	{
+		height: 5vh;
+	}
