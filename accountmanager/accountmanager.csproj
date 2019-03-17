@@ -84,7 +84,12 @@
     <Content Include="AccountServices.asmx" />
     <Content Include="empDashboard.html" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="logincss.css" />
+    <Content Include="logingpage.html" />
+    <Content Include="scripts.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountServices.asmx.cs">
