@@ -62,15 +62,43 @@ function LogOff()
                 //we logged off, so go back to logon page,
                 //stop checking messages
                 //and clear the chat panel
-                window.location = "./LoginPage.html";
+                window.location = "./loginpage.html";
             }
             else
             {
-                alert("logon failed");
+                alert("failed");
             }
         },
         error: function (e) {
             alert("boo...");
+        }
+    });
+}
+
+function SubmitProblems(problemID, UserID, Priority, Subject, description, solution, solved)
+//store problemID, UserID, Priority, Subject, description, solution, solved
+{
+    var webMethod = "AccountServices.asmx/SubmitProblems";
+    var parameters = "{\"problemID\":\"" + encodeURI(problemID) +
+        "\",\"UserID\":\"" + encodeURI(UserID) +
+        "\",\"Priority\":\"" + encodeURI(Priority) +
+        "\",\"Subject\":\"" + encodeURI(Subject) +
+        "\",\"description\":\"" + encodeURI(description) +
+        "\",\"solution\":\"" + encodeURI(solution) +
+        "\",\"solved\":\"" + encodeURI(solved) + "\"}";
+    console.log(parameters);
+
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        data: parameters,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            window.location = "./empDashboard.html";
+        },
+        error: function (e) {
+            alert("Server error");
         }
     });
 }

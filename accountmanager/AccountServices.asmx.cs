@@ -145,5 +145,42 @@ namespace accountmanager
             sqlConnection.Close();
         }
 
+        [WebMethod(EnableSession = true)]
+        public void SubmitProblems(string problemID, string userID, string priority, string subject, string description, string solution)
+        {
+            string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+            //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
+            //does is tell mySql server to return the primary key of the last inserted row.
+            string sqlSelect = "insert into submittedproblems (problemID, userID, priority, subject, description, solution, solved) " +
+                "values(@problemID, @userID, @priority, @subject, @description, @solution, @solved); SELECT LAST_INSERT_ID();";
+
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@problemID", HttpUtility.UrlDecode(problemID));
+            sqlCommand.Parameters.AddWithValue("@userID", HttpUtility.UrlDecode(userID));
+            sqlCommand.Parameters.AddWithValue("@priority", HttpUtility.UrlDecode(priority));
+            sqlCommand.Parameters.AddWithValue("@subject", HttpUtility.UrlDecode(subject));
+            sqlCommand.Parameters.AddWithValue("@description", HttpUtility.UrlDecode(description));
+            sqlCommand.Parameters.AddWithValue("@solution", HttpUtility.UrlDecode(solution));
+            sqlCommand.Parameters.AddWithValue("@user", Session["cust_email"]); //get username from current session
+            sqlCommand.Parameters.AddWithValue("@solved", true);
+
+            sqlConnection.Open();
+
+            try
+            {
+                int accountID = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                //here, you could use this accountID for additional queries regarding
+                //the requested account.  Really this is just an example to show you
+                //a query where you get the primary key of the inserted row back from
+                //the database!
+            }
+            catch (Exception e)
+            {
+
+            }
+            sqlConnection.Close();
+        }
     }
 }
