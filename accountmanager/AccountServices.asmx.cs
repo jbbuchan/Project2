@@ -146,7 +146,7 @@ namespace accountmanager
         }
 
         [WebMethod(EnableSession = true)]
-        public void SubmitProblems(string priority, string subject, string description, string solution)
+        public void SubmitProblems(string Priority, string Subject, string description, string solution)
         {
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
             //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
@@ -159,8 +159,8 @@ namespace accountmanager
 
             //sqlCommand.Parameters.AddWithValue("@problemID", HttpUtility.UrlDecode(problemID));
             //sqlCommand.Parameters.AddWithValue("@UserID", HttpUtility.UrlDecode(userID));
-            sqlCommand.Parameters.AddWithValue("@Priority", HttpUtility.UrlDecode(priority));
-            sqlCommand.Parameters.AddWithValue("@Subject", HttpUtility.UrlDecode(subject));
+            sqlCommand.Parameters.AddWithValue("@Priority", HttpUtility.UrlDecode(Priority));
+            sqlCommand.Parameters.AddWithValue("@Subject", HttpUtility.UrlDecode(Subject));
             sqlCommand.Parameters.AddWithValue("@description", HttpUtility.UrlDecode(description));
             sqlCommand.Parameters.AddWithValue("@solution", HttpUtility.UrlDecode(solution));
             sqlCommand.Parameters.AddWithValue("@UserID", "chua4@asu.edu"); //get username from current session
