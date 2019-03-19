@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submission Page</title>
+</head>
+<body>
+    <header>
+        <div id="headerDiv">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="####"><img src="usaaLogo.jpg" id="logo"></a>
+                    </li>
+                    <li>
+                        |  <a href="empDashboard.html">Home</a>  |
+                    </li>
+                    <li>
+                        <a href="SubmissionPage.html"> Submit Problem</a>  |
+                    </li>
+                    <li>
+                        <a href="#####"> Solve Problems</a>  |
+                    </li>
+                    <li>
+                        <a href="#####"> Log Off</a>  |
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <form>
+        <fieldset>
+            <legend>
+                How can we help you today?
+            </legend>
+            <p>Severity: </p><select name="severity">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="critical">Critical</option>
+            </select>
+
+            <p>Subject: </p><select name="subject">
+            <option value="General">General</option>
+            <option value="building ops">Building Ops</option>
+            <option value="office area">Office Area</option>
+            <option value="technology">Technology</option>
+            <option value="Private">Private</option>
+              </select>
+
+             <input type="text" name="description" placeholder="Describe here..." required/>
+             <input type="text" name="name" placeholder="What is a possible solution?" required/>
+             <input type="submit">
+        </fieldset>
+    </form>
+</body>
+</html>
