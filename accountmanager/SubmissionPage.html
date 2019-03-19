@@ -30,7 +30,8 @@
         </div>
     </header>
 
-    <form>
+    <form onsubmit="SubmitProblems($('#problemID').val(), $('#userID').val(), $('#serverity').val(),
+        $('#subject').val(), $('#description').val(), $('#solution').val()); return false;">
         <fieldset>
             <legend>
                 How can we help you today?
@@ -38,7 +39,7 @@
             <p>Severity: </p><select name="severity" id="selectors">
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
-                <option value="high">High</option>
+                <option value="high">High</option> 
                 <option value="critical">Critical</option>
             </select>
 
