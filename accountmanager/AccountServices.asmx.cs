@@ -151,19 +151,19 @@ namespace accountmanager
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
             //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
             //does is tell mySql server to return the primary key of the last inserted row.
-            string sqlSelect = "insert into submittedproblems (UserID, priority, subject, description, solution) " +
-                "values(@userID, @priority, @subject, @description, @solution); SELECT LAST_INSERT_ID();";
+            string sqlSelect = "insert into submittedproblems (UserID, Priority, Subject, description, solution) " +
+                "values(@UserID, @Priority, @Subject, @description, @solution); SELECT LAST_INSERT_ID();";
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
             MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
             //sqlCommand.Parameters.AddWithValue("@problemID", HttpUtility.UrlDecode(problemID));
             //sqlCommand.Parameters.AddWithValue("@UserID", HttpUtility.UrlDecode(userID));
-            sqlCommand.Parameters.AddWithValue("@priority", HttpUtility.UrlDecode(priority));
-            sqlCommand.Parameters.AddWithValue("@subject", HttpUtility.UrlDecode(subject));
+            sqlCommand.Parameters.AddWithValue("@Priority", HttpUtility.UrlDecode(priority));
+            sqlCommand.Parameters.AddWithValue("@Subject", HttpUtility.UrlDecode(subject));
             sqlCommand.Parameters.AddWithValue("@description", HttpUtility.UrlDecode(description));
             sqlCommand.Parameters.AddWithValue("@solution", HttpUtility.UrlDecode(solution));
-            sqlCommand.Parameters.AddWithValue("@UserID", Session["cust_email"]); //get username from current session
+            sqlCommand.Parameters.AddWithValue("@UserID", "chua4@asu.edu"); //get username from current session
             //sqlCommand.Parameters.AddWithValue("@solved", true);
 
             sqlConnection.Open();

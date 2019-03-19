@@ -30,20 +30,20 @@
         </div>
     </header>
 
-    <form onsubmit="SubmitProblems($('#problemID').val(), $('#userID').val(), $('#serverity').val(),
-        $('#subject').val(), $('#description').val(), $('#solution').val()); return false;">
+    <form onsubmit="SubmitProblems($('#severitySelectors').val(),
+        $('#subjectSelector').val(), $('#descriptionText').val(), $('#solutionText').val()); return false;">
         <fieldset>
             <legend>
                 How can we help you today?
             </legend>
-            <p>Severity: </p><select name="severity" id="selectors">
+            <p>Severity: </p><select name="severity" id="severitySelectors">
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option> 
                 <option value="critical">Critical</option>
             </select>
 
-            <p>Subject: </p><select name="subject" id="selectors">
+            <p>Subject: </p><select name="subject" id="subjectSelector">
             <option value="General">General</option>
             <option value="building ops">Building Ops</option>
             <option value="office area">Office Area</option>
@@ -51,9 +51,9 @@
             <option value="Private">Private</option>
               </select>
 
-             <input type="text" name="description" placeholder="Describe here..." required/>
-             <input type="text" name="name" placeholder="What is a possible solution?" required/>
-             <input type="submit" onclick="SubmitProblems(problemID, UserID, Priority, Subject, description, solution, solved)">
+             <input type="text" name="description" id="descriptionText" placeholder="Describe here..." required/>
+             <input type="text" name="name" id="solutionText" placeholder="What is a possible solution?" required/>
+             <input type="submit" value="Submit">
         </fieldset>
     </form>
 </body>
