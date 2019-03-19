@@ -75,15 +75,14 @@ function LogOff()
     });
 }
 
-function SubmitProblems(Priority, Subject, description, solution, solved)
+function SubmitProblems(Priority, Subject, description, solution)
 //store problemID, UserID, Priority, Subject, description, solution, solved
 {
     var webMethod = "AccountServices.asmx/SubmitProblems";
     var parameters = "{\"Priority\":\"" + encodeURI(Priority) +
         "\",\"Subject\":\"" + encodeURI(Subject) +
         "\",\"description\":\"" + encodeURI(description) +
-        "\",\"solution\":\"" + encodeURI(solution) +
-        "\",\"solved\":\"" + encodeURI(solved) + "\"}";
+        "\",\"solution\":\"" + encodeURI(solution) + "\"}";
     console.log(parameters);
 
     $.ajax({
