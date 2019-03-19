@@ -60,7 +60,7 @@ namespace accountmanager
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
             //here's our query.  A basic select with nothing fancy.  Note the parameters that begin with @
             //NOTICE: we added admin to what we pull, so that we can store it along with the id in the session
-            string sqlSelect = "SELECT cust_email, cust_password FROM user WHERE cust_email=@idValue and cust_password=@passValue";
+            string sqlSelect = "SELECT cust_email, admin FROM user WHERE cust_email=@idValue and cust_password=@passValue";
 
             //set up our connection object to be ready to use our connection string
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
@@ -88,7 +88,7 @@ namespace accountmanager
                 //so we can check those values later on other method calls to see if they 
                 //are 1) logged in at all, and 2) and admin or not
                 Session["cust_email"] = sqlDt.Rows[0]["cust_email"];
-                //Session["admin"] = sqlDt.Rows[0]["admin"];
+                Session["admin"] = sqlDt.Rows[0]["admin"];
                 success = true;
             }
             //return the result!
