@@ -25,9 +25,15 @@ function LogOn(uid, pass)
                 //but honestly I don't know...)
                 if (msg.d)
                 {
+                    LoadAccount();
                     //server replied true, so show the accounts panel
                     //alert("success!");
-                    window.location = './empDashboard.html';
+                    if (admin == "1") {
+                        window.location = './empDashboardAdmin.html';
+                    }
+                    if(admin == "0") {
+                        window.location = './empDashboard.html';
+                    }
                 }
                 else
                 {
@@ -98,4 +104,31 @@ function SubmitProblems(Priority, Subject, description, solution)
             alert("Server error");
         }
     });
+}
+var account;
+var admin;
+function LoadAccount() {
+    var webMethod = "AccountServices.asmx/GetAccount";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            if (msg.d.length > 0) {
+                //let's put our accounts that we get from the
+                //server into our accountsArray variable
+                //so we can use them in other functions as well
+                account = msg.d;
+                //this clears out the div that will hold our account info
+                admin = account[0].admin;
+                //again, we assume we're not an admin unless we see data from the server
+                //that we know only admins can see
+
+            }
+        }
+
+    });
+        
+    
 }

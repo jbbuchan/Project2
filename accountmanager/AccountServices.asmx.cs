@@ -144,7 +144,60 @@ namespace accountmanager
             }
             sqlConnection.Close();
         }
+        [WebMethod(EnableSession = true)]
+        public Account[] GetAccount()
+        {
+            //check out the return type.  It's an array of Account objects.  You can look at our custom Account class in this solution to see that it's 
+            //just a container for public class-level variables.  It's a simple container that asp.net will have no trouble converting into json.  When we return
+            //sets of information, it's a good idea to create a custom container class to represent instances (or rows) of that information, and then return an array of those objects.  
+            //Keeps everything simple.
 
+            //WE ONLY SHARE ACCOUNTS WITH LOGGED IN USERS!
+            if (Session["cust_email"] != null)
+            {
+                DataTable sqlDt = new DataTable("account");
+
+                string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+                string sqlSelect = "select * from user where Cust_Email = @currentUser";
+
+                MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+                MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@currentUser", Session["cust_email"]);
+
+                //gonna use this to fill a data table
+                MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+                //filling the data table
+                sqlDa.Fill(sqlDt);
+
+                //loop through each row in the dataset, creating instances
+                //of our container class Account.  Fill each acciount with
+                //data from the rows, then dump them in a list.
+
+                List<Account> account = new List<Account>();
+                //List<Restaurant> restaurantsReviewed = new List<Restaurant>();
+                for (int i = 0; i < sqlDt.Rows.Count; i++)
+                {
+                    //only share user id and pass info with admins!
+                    //if (Convert.ToInt32(Session["admin"]) == 1)
+                    account.Add(new Account
+                    {
+                        userId = sqlDt.Rows[i]["Cust_email"].ToString(),
+                        password = sqlDt.Rows[i]["Cust_password"].ToString(),
+                        firstName = sqlDt.Rows[i]["fname"].ToString(),
+                        lastName = sqlDt.Rows[i]["lname"].ToString(),
+                        admin = Convert.ToInt32(sqlDt.Rows[i]["admin"])
+                    });
+                }
+                //convert the list of accounts to an array and return!
+                return account.ToArray();
+            }
+            else
+            {
+                //if they're not logged in, return an empty array
+                return new Account[0];
+            }
+        }
         [WebMethod(EnableSession = true)]
         public void SubmitProblems(string Priority, string Subject, string description, string solution)
         {
