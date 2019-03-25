@@ -131,9 +131,7 @@ function LoadAccount() {
 	});
 }
         
-	var submitproblemsArray;
-	var submitproblemsTry = [];
-	var submitproblemsReviewed = [];
+	var userProblems;
 
 	function GetProblems() {
 		var webMethod = "AccountServices.asmx/GetProblems";
@@ -143,37 +141,20 @@ function LoadAccount() {
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
 			success: function (msg) {
-				if (msg.d.length > 0) {
-					//let's put our accounts that we get from the
-					//server into our accountsArray variable
-					//so we can use them in other functions as well
-					submitproblemsArray = msg.d;
+                if (msg.d.length > 0)
+                {
+					userProblems = msg.d;
 
-					//this clears out the div that will hold our account info
-					//$("#restaurantsTry").empty();
-					//$("#restaurantsReviewed").empty();
+                    for (var j = 0; j < userProblems.length; j++)
+                    {
+						var problem;
+						problem = "<div class='#'>" +
+							"<a class='#' href='javascript:LoadProblem(" + userProblems[j].problemID + ")'>" +
+							userProblems[j].problemID + " : " + userProblems[j].Subject +
+						"</a></div>"
 
-					for (var i = 0; i < submitproblemsArray.length; i++) {
-						//if (submitproblemsArray[i].Solved === true) {
-						//  submitproblemsTry.push(submitproblemsArray[i]);
-						//}
-						//else {
-						submitproblemsTry.push(submitproblemsArray[i]);
+						$("#myProblemsDiv").append(problem);
 					}
-					//}
-
-					for (var j = 0; j < submitproblemsTry.length; j++) {
-						var restT1;
-						restT1 = "<div class='submitproblemsRow' id='restT1" + [j].problemID + "'>" +
-							"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[j].problemID + ")'>" +
-							submitproblemsTry[j].problemID + " : "
-						"</a>"
-
-						$("#submitproblemsProblemID").append(restT1);
-					}
-
-
-
 
 					//for (var k = 0; k < submitproblemsArray.length; k++) {
 					//  //if (submitproblemsArray[i].Solved === true) {
@@ -184,105 +165,105 @@ function LoadAccount() {
 					//}
 					//}
 
-					for (var l = 0; l < submitproblemsTry.length; l++) {
-						var restT2;
-						restT2 = "<div class='submitproblemsRow' id='restT2" + [l].Priority + "'>" +
-							"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[l].Priority + ")'>" +
-							submitproblemsTry[l].Priority + " : "
-						"</a>"
+					//for (var l = 0; l < submitproblemsTry.length; l++) {
+					//	var restT2;
+					//	restT2 = "<div class='submitproblemsRow' id='restT2" + [l].Priority + "'>" +
+					//		"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[l].Priority + ")'>" +
+					//		submitproblemsTry[l].Priority + " : "
+					//	"</a>"
 
-						$("#submitproblemsPriority").append(restT2);
-					}
-
-
-					//for (var m = 0; m < submitproblemsArray.length; m++) {
-					//  //if (submitproblemsArray[i].Solved === true) {
-					//  //  submitproblemsTry.push(submitproblemsArray[i]);
-					//  //}
-					//  //else {
-					//  submitproblemsTry.push(submitproblemsArray[m]);
-					//}
+					//	$("#submitproblemsPriority").append(restT2);
 					//}
 
-					for (var n = 0; n < submitproblemsTry.length; n++) {
-						var restT3;
-						restT3 = "<div class='submitproblemsRow' id='restT3" + [n].Subject + "'>" +
-							"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[n].Subject + ")'>" +
-							submitproblemsTry[n].Subject + " : "
-						"</a>"
 
-						$("#submitproblemsSubject").append(restT3);
-					}
+					////for (var m = 0; m < submitproblemsArray.length; m++) {
+					////  //if (submitproblemsArray[i].Solved === true) {
+					////  //  submitproblemsTry.push(submitproblemsArray[i]);
+					////  //}
+					////  //else {
+					////  submitproblemsTry.push(submitproblemsArray[m]);
+					////}
+					////}
 
+					//for (var n = 0; n < submitproblemsTry.length; n++) {
+					//	var restT3;
+					//	restT3 = "<div class='submitproblemsRow' id='restT3" + [n].Subject + "'>" +
+					//		"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[n].Subject + ")'>" +
+					//		submitproblemsTry[n].Subject + " : "
+					//	"</a>"
 
-					//for (var o = 0; o < submitproblemsArray.length; o++) {
-					//  //if (submitproblemsArray[i].Solved === true) {
-					//  //  submitproblemsTry.push(submitproblemsArray[i]);
-					//  //}
-					//  //else {
-					//  submitproblemsTry.push(submitproblemsArray[o]);
-					//}
-					//}
-
-					for (var p = 0; p < submitproblemsTry.length; p++) {
-						var restT4;
-						restT4 = "<div class='submitproblemsRow' id='restT4" + [p].description + "'>" +
-							"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[p].description + ")'>" +
-							submitproblemsTry[p].description + " : "
-						"</a>"
-
-						$("#submitproblemsDescription").append(restT4);
-					}
-
-
-					//for (var q = 0; q < submitproblemsArray.length; q++) {
-					//  //if (submitproblemsArray[i].Solved === true) {
-					//  //  submitproblemsTry.push(submitproblemsArray[i]);
-					//  //}
-					//  //else {
-					//  submitproblemsTry.push(submitproblemsArray[q]);
-					//}
+					//	$("#submitproblemsSubject").append(restT3);
 					//}
 
-					for (var r = 0; r < submitproblemsTry.length; r++) {
-						var restT5;
-						restT5 = "<div class='submitproblemsRow' id='restT5" + [r].solution + "'>" +
-							"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[r].solution + ")'>" +
-							submitproblemsTry[r].solution + " : "
-						"</a>"
 
-						$("#submitproblemsSolution").append(restT5);
-					}
+					////for (var o = 0; o < submitproblemsArray.length; o++) {
+					////  //if (submitproblemsArray[i].Solved === true) {
+					////  //  submitproblemsTry.push(submitproblemsArray[i]);
+					////  //}
+					////  //else {
+					////  submitproblemsTry.push(submitproblemsArray[o]);
+					////}
+					////}
 
+					//for (var p = 0; p < submitproblemsTry.length; p++) {
+					//	var restT4;
+					//	restT4 = "<div class='submitproblemsRow' id='restT4" + [p].description + "'>" +
+					//		"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[p].description + ")'>" +
+					//		submitproblemsTry[p].description + " : "
+					//	"</a>"
 
-					//for (var s = 0; s< submitproblemsArray.length; s++) {
-					//  //if (submitproblemsArray[i].Solved === true) {
-					//  //  submitproblemsTry.push(submitproblemsArray[i]);
-					//  //}
-					//  //else {
-					//  submitproblemsTry.push(submitproblemsArray[s]);
+					//	$("#submitproblemsDescription").append(restT4);
 					//}
+
+
+					////for (var q = 0; q < submitproblemsArray.length; q++) {
+					////  //if (submitproblemsArray[i].Solved === true) {
+					////  //  submitproblemsTry.push(submitproblemsArray[i]);
+					////  //}
+					////  //else {
+					////  submitproblemsTry.push(submitproblemsArray[q]);
+					////}
+					////}
+
+					//for (var r = 0; r < submitproblemsTry.length; r++) {
+					//	var restT5;
+					//	restT5 = "<div class='submitproblemsRow' id='restT5" + [r].solution + "'>" +
+					//		"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[r].solution + ")'>" +
+					//		submitproblemsTry[r].solution + " : "
+					//	"</a>"
+
+					//	$("#submitproblemsSolution").append(restT5);
 					//}
 
-					for (var t = 0; t < submitproblemsTry.length; t++) {
-						var restT6;
-						restT6 = "<div class='submitproblemsRow' id='restT6" + [t].UserID + "'>" +
-							"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[t].UserID + ")'>" +
-							submitproblemsTry[t].UserID + " : "
-						"</a>"
 
-						$("#submitproblemsUserID").append(restT6);
-					}
+					////for (var s = 0; s< submitproblemsArray.length; s++) {
+					////  //if (submitproblemsArray[i].Solved === true) {
+					////  //  submitproblemsTry.push(submitproblemsArray[i]);
+					////  //}
+					////  //else {
+					////  submitproblemsTry.push(submitproblemsArray[s]);
+					////}
+					////}
 
-					//for (var k = 0; k < submitproblemsReviewed.length; k++) {
-					//  var restR;
-					//  restR = "<div class='restaurantRow' id='restR" + [k].problemID + "'>" +
-					//      "<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsReviewed[k].problemID + "'>" +
-					//      submitproblemsReviewed[k].Priority + " : " + submitproblemsReviewed[k].solution +
-					//      "</a>"
+					//for (var t = 0; t < submitproblemsTry.length; t++) {
+					//	var restT6;
+					//	restT6 = "<div class='submitproblemsRow' id='restT6" + [t].UserID + "'>" +
+					//		"<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsTry[t].UserID + ")'>" +
+					//		submitproblemsTry[t].UserID + " : "
+					//	"</a>"
 
-					//  $("#submitproblemsReviewed").append(restR);
+					//	$("#submitproblemsUserID").append(restT6);
 					//}
+
+					////for (var k = 0; k < submitproblemsReviewed.length; k++) {
+					////  var restR;
+					////  restR = "<div class='restaurantRow' id='restR" + [k].problemID + "'>" +
+					////      "<a class='nameTag' href='javascript:LoadSubmitProblems(" + submitproblemsReviewed[k].problemID + "'>" +
+					////      submitproblemsReviewed[k].Priority + " : " + submitproblemsReviewed[k].solution +
+					////      "</a>"
+
+					////  $("#submitproblemsReviewed").append(restR);
+					////}
 				}
 			},
 			error: function (e) {
@@ -290,3 +271,13 @@ function LoadAccount() {
 			}
 		});
 	}
+
+function loadDashboard()
+{
+    GetProblems();
+}
+
+function redirect()
+{
+    window.location = 'logingpage.html';
+}

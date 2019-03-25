@@ -216,7 +216,7 @@ namespace accountmanager
             sqlCommand.Parameters.AddWithValue("@Subject", HttpUtility.UrlDecode(Subject));
             sqlCommand.Parameters.AddWithValue("@description", HttpUtility.UrlDecode(description));
             sqlCommand.Parameters.AddWithValue("@solution", HttpUtility.UrlDecode(solution));
-            sqlCommand.Parameters.AddWithValue("@UserID", "chua4@asu.edu"); //get username from current session
+            sqlCommand.Parameters.AddWithValue("@UserID", Session["cust_email"]); //get username from current session
             //sqlCommand.Parameters.AddWithValue("@solved", true);
 
             sqlConnection.Open();
@@ -251,11 +251,12 @@ namespace accountmanager
 
                 string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
                 //string sqlSelect = "select * from submittedproblems where UserID = @currentUserID";
-                string sqlSelect = "select * from submittedproblems";
+                string sqlSelect = "select * from submittedproblems where UserID  = @currentUser";
+
                 MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
                 MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
-                sqlCommand.Parameters.AddWithValue("@currentUserID", Session["cust_email"]);
+                sqlCommand.Parameters.AddWithValue("@currentUser", Session["cust_email"]);
 
                 //gonna use this to fill a data table
                 MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
