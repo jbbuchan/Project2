@@ -12,43 +12,43 @@ using System.Data;
 
 namespace accountmanager
 {
-	/// <summary>
-	/// Summary description for AccountServices
-	/// </summary>
-	[WebService(Namespace = "http://tempuri.org/")]
-	[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-	[System.ComponentModel.ToolboxItem(false)]
-	// To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-	[System.Web.Script.Services.ScriptService]
-	public class AccountServices : System.Web.Services.WebService
-	{
+    /// <summary>
+    /// Summary description for AccountServices
+    /// </summary>
+    [WebService(Namespace = "http://tempuri.org/")]
+    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [System.ComponentModel.ToolboxItem(false)]
+    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
+    [System.Web.Script.Services.ScriptService]
+    public class AccountServices : System.Web.Services.WebService
+    {
 
-		[WebMethod]
-		public int NumberOfAccounts()
-		{
-			//here we are grabbing that connection string from our web.config file
-			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
-			//here's our query.  A basic select with nothing fancy.
-			string sqlSelect = "SELECT * from account";
-
-
-
-			//set up our connection object to be ready to use our connection string
-			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
-			//set up our command object to use our connection, and our query
-			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+        [WebMethod]
+        public int NumberOfAccounts()
+        {
+            //here we are grabbing that connection string from our web.config file
+            string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+            //here's our query.  A basic select with nothing fancy.
+            string sqlSelect = "SELECT * from account";
 
 
-			//a data adapter acts like a bridge between our command object and 
-			//the data we are trying to get back and put in a table object
-			MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
-			//here's the table we want to fill with the results from our query
-			DataTable sqlDt = new DataTable();
-			//here we go filling it!
-			sqlDa.Fill(sqlDt);
-			//return the number of rows we have, that's how many accounts are in the system!
-			return sqlDt.Rows.Count;
-		}
+
+            //set up our connection object to be ready to use our connection string
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            //set up our command object to use our connection, and our query
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+
+            //a data adapter acts like a bridge between our command object and 
+            //the data we are trying to get back and put in a table object
+            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+            //here's the table we want to fill with the results from our query
+            DataTable sqlDt = new DataTable();
+            //here we go filling it!
+            sqlDa.Fill(sqlDt);
+            //return the number of rows we have, that's how many accounts are in the system!
+            return sqlDt.Rows.Count;
+        }
         //EXAMPLE OF A SIMPLE SELECT QUERY (PARAMETERS PASSED IN FROM CLIENT)
         [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
         public bool LogOn(string uid, string pass)
@@ -235,5 +235,64 @@ namespace accountmanager
             }
             sqlConnection.Close();
         }
+
+        [WebMethod(EnableSession = true)]
+        public SubmitProblems[] GetProblems()
+        {
+            //check out the return type.  It's an array of Account objects.  You can look at our custom Account class in this solution to see that it's 
+            //just a container for public class-level variables.  It's a simple container that asp.net will have no trouble converting into json.  When we return
+            //sets of information, it's a good idea to create a custom container class to represent instances (or rows) of that information, and then return an array of those objects.  
+            //Keeps everything simple.
+
+            //WE ONLY SHARE ACCOUNTS WITH LOGGED IN USERS!
+            if (Session["cust_email"] != null)
+            {
+                DataTable sqlDt = new DataTable("submittedproblems");
+
+                string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+                //string sqlSelect = "select * from submittedproblems where UserID = @currentUserID";
+                string sqlSelect = "select * from submittedproblems";
+                MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+                MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@currentUserID", Session["cust_email"]);
+
+                //gonna use this to fill a data table
+                MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+                //filling the data table
+                sqlDa.Fill(sqlDt);
+
+                //loop through each row in the dataset, creating instances
+                //of our container class Account.  Fill each account with
+                //data from the rows, then dump them in a list.
+
+                List<SubmitProblems> submitproblems = new List<SubmitProblems>();
+                //List<Restaurant> restaurantsReviewed = new List<Restaurant>();
+                for (int i = 0; i < sqlDt.Rows.Count; i++)
+                {
+                    //only share user id and pass info with admins!
+                    //if (Convert.ToInt32(Session["admin"]) == 1)
+                    submitproblems.Add(new SubmitProblems
+                    {
+                        problemID = Convert.ToInt32(sqlDt.Rows[i]["problemID"]),
+                        UserID = sqlDt.Rows[i]["UserID"].ToString(),
+                        Priority = sqlDt.Rows[i]["Priority"].ToString(),
+                        Subject = sqlDt.Rows[i]["Subject"].ToString(),
+                        description = sqlDt.Rows[i]["description"].ToString(),
+                        solution = sqlDt.Rows[i]["solution"].ToString(),
+                        Solved = Convert.ToBoolean(sqlDt.Rows[i]["Solved"])
+
+                    });
+                }
+                //convert the list of accounts to an array and return!
+                return submitproblems.ToArray();
+            }
+            else
+            {
+                //if they're not logged in, return an empty array
+                return new SubmitProblems[0];
+            }
+        }
     }
 }
+

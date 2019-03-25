@@ -84,6 +84,8 @@
     <Content Include="AccountServices.asmx" />
     <Content Include="empDashboard.html" />
     <Content Include="Global.asax" />
+    <Content Include="listviewProject2.html" />
+    <Content Include="listViewProject2CSS.css" />
     <Content Include="logincss.css" />
     <Content Include="logingpage.html" />
     <Content Include="scripts.js" />
@@ -103,6 +105,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubmitProblems.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -129,7 +132,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50406</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

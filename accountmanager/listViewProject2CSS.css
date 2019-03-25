@@ -1,0 +1,45 @@
+
+
+#toTryButton{
+  background-image: url("toTryPic.png");
+}
+
+#haveTriedButton{
+  background-image: url("haveTriedPic.png");
+}
+
+#pastReviewsButton{
+  background-image: url("pastReviewsPic.png");
+}
+
+#toTryButton, #haveTriedButton, #pastReviewsButton{
+  height: 40vh;
+  color: #76323F;
+  font-weight: bolder;
+  border-style: none;
+}
+
+
+#toTryDiv, #haveTriedDiv, #submitproblemsTry, #submitproblemsReviewed, submitproblemsPriority, submitproblemsSubject{
+    display: inline-block;
+  font-size: medium;
+  border-style: none;
+  vertical-align: top;
+  width: 35vw;
+ 
+}
+
+#toTryDiv, #haveTriedDiv, #submitproblemsTry, #submitproblemsReviewed, submitproblemsPriority, submitproblemsSubject {
+    color: #76323F;
+    font-size: large;
+    font-weight: bold;
+}
+
+    #submitproblemsTry a, #submitproblemsReviewed a, #submitproblemsTry a, #submitproblemsReviewed a, submitproblemsPriority a, submitproblemsSubject a {
+        color: #565656;
+    }
+
+#submitproblemsTry a:hover, #submitproblemsReviewed a:hover{
+color: #76323F;
+}
+
