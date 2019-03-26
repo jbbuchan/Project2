@@ -12913,7 +12913,7 @@ body.sidebar-toggled footer.sticky-footer {
     width: 100%;
 }
 
-form {
+#submitFormId {
     border-radius: 5px;
     background-color: white;
     padding: 20px;
@@ -12922,7 +12922,7 @@ form {
     margin-top: 3%;
 }
 
-input[type=text], select {
+#submitTextId, select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -12937,7 +12937,7 @@ input[type=text], select {
     height: auto;
 }
 
-input[type=submit] {
+#submitButtonId {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -12948,6 +12948,6 @@ input[type=submit] {
     cursor: pointer;
 }
 
-    input[type=submit]:hover {
+#submitButtonId:hover {
         background-color: #45a049;
     }

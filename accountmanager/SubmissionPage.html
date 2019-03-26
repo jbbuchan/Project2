@@ -320,7 +320,7 @@
 
                     <!-- Page Heading -->
 
-                    <form onsubmit="SubmitProblems($('#severitySelectors').val(),
+                    <form id="submitFormId" onsubmit="SubmitProblems($('#severitySelectors').val(),
         $('#subjectSelector').val(), $('#descriptionText').val(), $('#solutionText').val()); return false;">
                         <fieldset>
                             <legend>
@@ -339,9 +339,9 @@
                                 <option value="technology">Technology</option>
                                 <option value="Private">Private</option>
                             </select>
-                            <input type="text" name="description" id="descriptionText" placeholder="Describe here..." required />
-                            <input type="text" name="name" id="solutionText" placeholder="What is a possible solution?" required />
-                            <input type="submit" value="Submit">
+                            <input type="text" name="description" id="submitTextId" placeholder="Describe here..." required />
+                            <input type="text" name="solution" id="submitTextId" placeholder="What is a possible solution?" required />
+                            <input id="submitButtonId" type="submit" value="Submit">
                         </fieldset>
                     </form>
                     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

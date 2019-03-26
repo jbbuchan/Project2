@@ -137,7 +137,7 @@ body, html {
     color: rgb(12, 97, 33);
 }
 
-#headerDiv {
+/*#headerDiv {
     overflow: hidden;
     background-color: #192d53;
 }
@@ -171,7 +171,7 @@ body, html {
     font-size: 12px;
     margin: 15px;
     vertical-align: bottom;
-    line-height: normal;
+    line-height: normal;*/
 }
 form {
     border-radius: 5px;
@@ -181,7 +181,7 @@ form {
     margin-left: 12%;
     margin-top: 3%;
 }
-input[type=text], select {
+input[type=text] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
