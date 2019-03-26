@@ -7,7 +7,6 @@
 body, html {
     height: 100%;
     background-repeat: no-repeat;
-    background: #0b2237 url(https://content.usaa.com/mcontent/static_assets/Media/prodOther_accent_brandBanner_dark_diamondBackground.svg) 0 0;
     font-family: Gotham Narrow,Arial,sans-serif;
 }
 
@@ -209,11 +208,8 @@ input[type=submit] {
     cursor: pointer;
 }
 
-  input[type=submit]:hover {
+    input[type=submit]:hover {
         background-color: #45a049;
     }
-  SubmissionPage{
-      
-  }
 
 

@@ -3,11 +3,17 @@
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="logincss">
     <link rel="stylesheet" href="logincss.css">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <style>
+        body {
+            background-image: url(https://image.freepik.com/free-photo/close-up-male-hands-typing-laptop-keyboard_1262-2250.jpg);
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="card card-container">
-            <img id="profile-img" class="profile-img-card" src="usaaLogo.jpg" />
             <p id="profile-name" class="profile-name-card"></p>
 
             <form class="form-signin" onsubmit="LogOn($('#inputEmail').val(), $('#inputPassword').val()); return false;">
