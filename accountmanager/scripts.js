@@ -131,7 +131,7 @@ function LoadAccount() {
 	});
 }
         
-	var adminProblems;
+	var problemsList;
 
 	function GetProblems() {
 		var webMethod = "AccountServices.asmx/GetProblems";
@@ -143,14 +143,14 @@ function LoadAccount() {
 			success: function (msg) {
                 if (msg.d.length > 0)
                 {
-					adminProblems = msg.d;
+					problemsList = msg.d;
 
-                    for (var j = 0; j < adminProblems.length; j++)
+                    for (var j = 0; j < problemsList.length; j++)
                     {
 						var problem;
-						problem = "<div class='#'>" +
-							"<a class='#' href='javascript:LoadProblem(" + adminProblems[j].problemID + ")'>" +
-							adminProblems[j].problemID + " | " + adminProblems[j].Subject + " | " + adminProblems[j].Priority +
+                        problem = "<div class='#'>" +
+                            "<a class='#' href='javascript:LoadProblem(" + problemsList[j].problemID + ")'>" +
+                            problemsList[j].problemID + " | " + problemsList[j].Subject + " | " + problemsList[j].Priority +
 						"</a></div>"
 
 						$("#myProblemsDiv").append(problem);
@@ -300,7 +300,7 @@ function LoadAccount() {
 
 var adminProblems;
 
-function GetProblems() {
+function GetProblemsAdmin() {
     var webMethod = "AccountServices.asmx/GetProblems";
     $.ajax({
         type: "POST",
