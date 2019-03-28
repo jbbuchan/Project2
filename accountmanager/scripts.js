@@ -150,7 +150,7 @@ function LoadAccount() {
 						var problem;
 						problem = "<div class='#'>" +
 							"<a class='#' href='javascript:LoadProblem(" + userProblems[j].problemID + ")'>" +
-							userProblems[j].problemID + " : " + userProblems[j].Subject +
+							userProblems[j].problemID + " | " + userProblems[j].Subject + " | " + userProblems[j].Priority +
 						"</a></div>"
 
 						$("#myProblemsDiv").append(problem);
