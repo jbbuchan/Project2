@@ -49,7 +49,7 @@ namespace accountmanager
             //return the number of rows we have, that's how many accounts are in the system!
             return sqlDt.Rows.Count;
         }
-        //EXAMPLE OF A SIMPLE SELECT QUERY (PARAMETERS PASSED IN FROM CLIENT)
+
         [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
         public bool LogOn(string uid, string pass)
         {
