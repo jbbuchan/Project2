@@ -42,7 +42,7 @@ function LoadAccount() {
                 admin = account[0].admin;
 
                 if (admin == "1") {
-                    window.location = './empDashboardAdmin.html';
+                    window.location = './empDashboardAdmin2.html';
                 }
                 if (admin == "0") {
                     window.location = './empDashboard.html';
@@ -312,3 +312,4 @@ function redirect()
 {
     window.location = 'logingpage.html';
 }
+
