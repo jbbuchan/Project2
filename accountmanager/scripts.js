@@ -46,7 +46,9 @@ function LoadAccount() {
                     window.location = './empDashboardAdmin2.html';
                 }
                 if (admin == "0") {
+                    
                     window.location = './empDashboard.html';
+                    
                 }
                 
                 
@@ -157,18 +159,7 @@ function SubmitProblems(Priority, Subject, description, solution)
                             $("#myProblemsDiv").append(problem);
                         }
                     }
-                    for (var j = 0; j < problemsList.length; j++) {
-                        var severity = problemsList[j].Priority;
-
-                        if (severity == "critical") {
-                            problem = "<div class='#'>" +
-                                "<a class='#' href='javascript:LoadProblem(" + problemsList[j].problemID + ")'>" +
-                                problemsList[j].problemID + " | " + problemsList[j].Subject + " | " + problemsList[j].Priority +
-                                "</a></div>"
-
-                            $("#myProblemsDiv").append(problem);
-                        }
-					}
+                    
 
 					//for (var k = 0; k < submitproblemsArray.length; k++) {
 					//  //if (submitproblemsArray[i].Solved === true) {
@@ -327,13 +318,16 @@ function GetProblemsAdmin() {
                 adminProblems = msg.d;
 
                 for (var j = 0; j < adminProblems.length; j++) {
-                    var problem;
-                    problem = "<div class='#'>" +
-                        "<a class='#' href='javascript:LoadProblem(" + adminProblems[j].problemID + ")'>" +
-                        adminProblems[j].problemID + " | " + adminProblems[j].Subject + " | " + adminProblems[j].Priority +
-                        "</a></div>"
+                    var severity = adminProblems[j].Priority;
 
-                    //$("#").append(problem);
+                    if (severity == "critical") {
+                        problem = "<div class='#'>" +
+                            "<a class='#' href='javascript:LoadProblem(" + adminProblems[j].problemID + ")'>" +
+                            adminProblems[j].problemID + " | " + adminProblems[j].Subject + " | " + adminProblems[j].Priority +
+                            "</a></div>"
+
+                        $("#myProblemsDiv").append(problem);
+                    }
                 }
             }
         },
@@ -347,6 +341,9 @@ function GetProblemsAdmin() {
 function loadDashboard()
 {
     GetProblems();
+}
+function loadDashboardAdmin() {
+    GetProblemsAdmin();
 }
 
 function redirect()
