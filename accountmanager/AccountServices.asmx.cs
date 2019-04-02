@@ -251,7 +251,7 @@ namespace accountmanager
 
                 string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
                 //string sqlSelect = "select * from submittedproblems where UserID = @currentUserID";
-                string sqlSelect = "select * from submittedproblems where UserID  = @currentUser";
+                string sqlSelect = "select * from submittedproblems";
 
                 MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
                 MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);

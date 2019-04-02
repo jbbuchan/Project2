@@ -1,3 +1,5 @@
+var account;
+var admin;
 function LogOn(uid, pass)
 {
     var webMethod = "AccountServices.asmx/LogOn";
@@ -27,8 +29,7 @@ function LogOn(uid, pass)
         });
 }
 
-var account;
-var admin;
+
 function LoadAccount() {
     var webMethod = "AccountServices.asmx/GetAccount";
     $.ajax({
@@ -47,6 +48,8 @@ function LoadAccount() {
                 if (admin == "0") {
                     window.location = './empDashboard.html';
                 }
+                
+                
             }
         }
         ,
@@ -106,7 +109,7 @@ function SubmitProblems(Priority, Subject, description, solution)
     });
 }        
 	var problemsList;
-
+    
 	function GetProblems() {
 		var webMethod = "AccountServices.asmx/GetProblems";
 		$.ajax({
@@ -117,17 +120,54 @@ function SubmitProblems(Priority, Subject, description, solution)
 			success: function (msg) {
                 if (msg.d.length > 0)
                 {
-					problemsList = msg.d;
+                    LoadAccount2();
+                    problemsList = msg.d;
+                    var problem;
 
-                    for (var j = 0; j < problemsList.length; j++)
-                    {
-						var problem;
-                        problem = "<div class='#'>" +
-                            "<a class='#' href='javascript:LoadProblem(" + problemsList[j].problemID + ")'>" +
-                            problemsList[j].problemID + " | " + problemsList[j].Subject + " | " + problemsList[j].Priority +
-						"</a></div>"
+                    for (var j = 0; j < problemsList.length; j++) {
+                        var severity = problemsList[j].Priority;
+                        if (severity == "low") {
+                            problem = "<div class='#'>" +
+                                "<a class='#' href='javascript:LoadProblem(" + problemsList[j].problemID + ")'>" +
+                                problemsList[j].problemID + " | " + problemsList[j].Subject + " | " + problemsList[j].Priority +
+                                "</a></div>"
 
-						$("#myProblemsDiv").append(problem);
+                            $("#myProblemsDiv").append(problem);
+                        }
+                    }
+                    for (var j = 0; j < problemsList.length; j++) {
+                        var severity = problemsList[j].Priority;
+                        if (severity == "medium") {
+                            problem = "<div class='#'>" +
+                                "<a class='#' href='javascript:LoadProblem(" + problemsList[j].problemID + ")'>" +
+                                problemsList[j].problemID + " | " + problemsList[j].Subject + " | " + problemsList[j].Priority +
+                                "</a></div>"
+
+                            $("#myProblemsDiv").append(problem);
+                        }
+                    }
+                    for (var j = 0; j < problemsList.length; j++) {
+                        var severity = problemsList[j].Priority;
+                        if (severity == "high") {
+                            problem = "<div class='#'>" +
+                                "<a class='#' href='javascript:LoadProblem(" + problemsList[j].problemID + ")'>" +
+                                problemsList[j].problemID + " | " + problemsList[j].Subject + " | " + problemsList[j].Priority +
+                                "</a></div>"
+
+                            $("#myProblemsDiv").append(problem);
+                        }
+                    }
+                    for (var j = 0; j < problemsList.length; j++) {
+                        var severity = problemsList[j].Priority;
+
+                        if (severity == "critical") {
+                            problem = "<div class='#'>" +
+                                "<a class='#' href='javascript:LoadProblem(" + problemsList[j].problemID + ")'>" +
+                                problemsList[j].problemID + " | " + problemsList[j].Subject + " | " + problemsList[j].Priority +
+                                "</a></div>"
+
+                            $("#myProblemsDiv").append(problem);
+                        }
 					}
 
 					//for (var k = 0; k < submitproblemsArray.length; k++) {
@@ -283,6 +323,7 @@ function GetProblemsAdmin() {
         dataType: "json",
         success: function (msg) {
             if (msg.d.length > 0) {
+                
                 adminProblems = msg.d;
 
                 for (var j = 0; j < adminProblems.length; j++) {
