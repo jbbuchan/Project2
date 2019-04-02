@@ -351,3 +351,8 @@ function redirect()
     window.location = 'logingpage.html';
 }
 
+function LoadProblem(problemId)
+{
+    window.location = 'solve.html';
+
+}
