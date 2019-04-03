@@ -87,7 +87,7 @@
     <Content Include="AccountServices.asmx" />
     <Content Include="dashboard.css" />
     <Content Include="empDashboard.html" />
-    <Content Include="empDashboardAdmin2.html" />
+    <Content Include="adminDashboard.html" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="listviewProject2.html" />
