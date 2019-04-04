@@ -323,14 +323,13 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Solve Something for Someone</h1>
-                    <form id="submitFormId">
+                    <form id="submitFormId" onsubmit="Suggest($('#inputEmail').val(), $('#submitTextId').val()); return false;">
                         <fieldset>
-                            <legend>
-                                What would you like to share with us?
-                            </legend>
-                            <input type="text" name="description" id="submitTextId" placeholder="Tell us your ideas!" required />
-                            <input id="submitButtonId" type="submit" value="Submit">
+                            <legend id="solutionHead"></legend>
+                            <input type="text" name="description" id="submitTextId" placeholder="Suggest a Solution:" required />
+                            <input id="submitButtonId" type="submit" value="Submit" />
                         </fieldset>
                     </form>
+                </div>
 </body>
 </html>
