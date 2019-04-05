@@ -196,13 +196,11 @@ namespace accountmanager
             }
         }
         [WebMethod(EnableSession = true)]
-        public void SubmitProblems(string Priority, string Subject, string description, string solution)
+        public void SubmitProblems(string Priority, string Subject, string description, string solution, string privacy)
         {
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
-            //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
-            //does is tell mySql server to return the primary key of the last inserted row.
-            string sqlSelect = "insert into submittedproblems (UserID, Priority, Subject, description, solution) " +
-                "values(@UserID, @Priority, @Subject, @description, @solution); SELECT LAST_INSERT_ID();";
+            string sqlSelect = "insert into submittedproblems (UserID, Priority, Subject, description, solution, privacy) " +
+                "values(@UserID, @Priority, @Subject, @description, @solution, @privacy); SELECT LAST_INSERT_ID();";
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
             MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
@@ -214,6 +212,7 @@ namespace accountmanager
             sqlCommand.Parameters.AddWithValue("@description", HttpUtility.UrlDecode(description));
             sqlCommand.Parameters.AddWithValue("@solution", HttpUtility.UrlDecode(solution));
             sqlCommand.Parameters.AddWithValue("@UserID", Session["cust_email"]); //get username from current session
+            sqlCommand.Parameters.AddWithValue("@privacy", HttpUtility.UrlDecode(privacy));
             //sqlCommand.Parameters.AddWithValue("@solved", true);
 
             sqlConnection.Open();

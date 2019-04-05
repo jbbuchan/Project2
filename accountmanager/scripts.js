@@ -84,11 +84,23 @@ function LoadAccount() {
 function SubmitProblems(Priority, Subject, description, solution)
 //store problemID, UserID, Priority, Subject, description, solution, solved
 {
+    var privacy;
+    var privOps = document.getElementsByName('privacy');
+
+    for (var i = 0; i < privOps.length; i++)
+    {
+        if (privOps[i].checked)
+        {
+            privacy = privOps[i].value;
+        }
+    }
+
     var webMethod = "AccountServices.asmx/SubmitProblems";
     var parameters = "{\"Priority\":\"" + encodeURI(Priority) +
         "\",\"Subject\":\"" + encodeURI(Subject) +
         "\",\"description\":\"" + encodeURI(description) +
-        "\",\"solution\":\"" + encodeURI(solution) + "\"}";
+        "\",\"solution\":\"" + encodeURI(solution) +
+        "\",\"privacy\":\"" + encodeURI(privacy) + "\"}";
     console.log(parameters);
 
     $.ajax({
@@ -219,6 +231,22 @@ function LoadTicket(problemId)
 {
     window.location = 'solve.html';
 
+    var problemDesc;
+    for (var i = 0; i < publicTickets.length; i++)
+    {
+        if (problemId == publicTickets[i].problemID)
+        {
+            problemDesc = publicTickets[i].description;
+        }
+    }
+
+    var problemHead;
+    problemHead = "<div>" + problemId + " | " + problemDesc + "</div>";
+    console.log(problemHead);
+
+    $("#solutionHead").append(problemHead);
+
+    console.log("wait here");
 }
 
 function AdminSolve(problemId)
