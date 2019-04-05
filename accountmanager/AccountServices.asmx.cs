@@ -321,6 +321,36 @@ namespace accountmanager
             }
         }
 
+        [WebMethod(EnableSession = true)]
+        public void Suggest(string problemId, string solution)
+        {
+            string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+            string sqlSelect = "insert into solutions (problemId, solution, user) " +
+                "values(@problemId, @solution, @user); SELECT LAST_INSERT_ID();";
+
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@problemId", HttpUtility.UrlDecode(problemId));
+            sqlCommand.Parameters.AddWithValue("@solution", HttpUtility.UrlDecode(solution));
+            sqlCommand.Parameters.AddWithValue("@user", Session["cust_email"]); //get username from current session
+
+            sqlConnection.Open();
+
+            try
+            {
+                int accountID = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                //here, you could use this accountID for additional queries regarding
+                //the requested account.  Really this is just an example to show you
+                //a query where you get the primary key of the inserted row back from
+                //the database!
+            }
+            catch (Exception e)
+            {
+
+            }
+            sqlConnection.Close();
+        }
     }
 }
 

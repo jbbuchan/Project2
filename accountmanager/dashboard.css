@@ -562,6 +562,18 @@ pre {
     margin-left: auto;
 }
 
+.userTickets {
+    text-decoration: none;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    width: 50%;
+}
+
+.ticketsDiv {}
+
 @media (min-width: 576px) {
     .container {
         max-width: 540px;
@@ -12923,6 +12935,17 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 #submitTextId, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 150px;
+}
+
+.submissionBox, select{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

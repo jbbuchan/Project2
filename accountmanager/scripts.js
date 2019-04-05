@@ -136,8 +136,8 @@ function GetUserTickets()
          
                    for (var j = 0; j < userTickets.length; j++)
                    {
-                        problem = "<div class='#'>" +
-                        "<a class='#' href='javascript:LoadTicket(" + userTickets[j].problemID + ")'>" +
+                       problem = "<div class='ticketsDiv'>" +
+                        "<a class='userTickets' href='javascript:LoadTicket(" + userTickets[j].problemID + ")'>" +
                         userTickets[j].problemID + " | " + userTickets[j].Subject + " | " + userTickets[j].Priority +
                         "</a></div>"
 
@@ -166,9 +166,10 @@ function GetPublicTickets() {
                 publicTickets = msg.d;
                 for (var j = 0; j < publicTickets.length; j++)
                 {
-                    problem = "<div class='#'>" +
-                    "<a class='#' href='javascript:LoadTicket(" + publicTickets[j].problemID + ")'>" +
-                    publicTickets[j].problemID + " | " + publicTickets[j].Subject + " | " + publicTickets[j].Priority +
+                    problem = "<div class='ticketsDiv'>" +
+                    "<a class='userTickets' href='javascript:LoadTicket(" + publicTickets[j].problemID + ")'>" +
+                        publicTickets[j].problemID + " | " + publicTickets[j].Subject + " | " + publicTickets[j].Priority +
+                        " | " + publicTickets[j].description +
                     "</a></div>"
 
                     $("#publicTicketsDiv").append(problem);      
@@ -197,7 +198,7 @@ function GetAdminTickets() {
                 for (var j = 0; j < adminTickets.length; j++) {
                     problem = "<div class='#'>" +
                         "<a class='#' href='javascript:AdminSolve(" + adminTickets[j].problemID + ")'>" +
-                        adminTickets[j].problemID + " | " + adminTickets[j].Subject + " | " + adminTickets[j].Priority + " | " + adminTickets[j].UserID +
+                        adminTickets[j].problemID + " | " + adminTickets[j].Subject + " | " + adminTickets[j].Priority + " | " + adminTickets[j].UserID + " | " + publicTickets[j].description +
                         "</a></div>"
 
                     $("#adminTicketsDiv").append(problem);
@@ -230,6 +231,7 @@ function redirect()
 
 function LoadTicket(problemId)
 {
+    //grabs the ticket id and description and stores it using JSON to use on the next page
     var ticketDesc;
     for (var i = 0; i < publicTickets.length; i++)
     {
@@ -250,17 +252,45 @@ function LoadTicket(problemId)
 
 function LoadTicket2()
 {
+    //grabs the info we stored in previous function, diplays for user to see what problem they are solving
     var ticketId = localStorage.getItem("ticketId");
     var ticketDesc = localStorage.getItem("ticketDesc");
 
-    var problemHead = "<div>" + ticketId + " | " + ticketDesc + "</div>";
+    var problemHead = ticketId + " | " + ticketDesc;
 
     $("#solutionHead").append(problemHead);
     console.log(problemHead);
 }
 
+function Suggest(solution)
+{
+    var problemId = localStorage.getItem("ticketId");
+
+    var webMethod = "AccountServices.asmx/Suggest";
+    var parameters =
+        "{\"problemId\":\"" + encodeURI(problemId) +
+        "\",\"solution\":\"" + encodeURI(solution) + "\"}";
+    console.log(parameters);
+
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        data: parameters,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            console.log(msg);
+            localStorage.clear();
+            window.location = "./empDashboard.html";
+        },
+        error: function (e) {
+            alert("Server error");
+        }
+    });
+}
+
 function AdminSolve(problemId)
 {
     //temporary location until we create page for admin to choose solution
-    window.location = 'solve.html';
+    window.location = '#';
 }

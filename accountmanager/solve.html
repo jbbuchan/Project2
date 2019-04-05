@@ -322,10 +322,10 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Solve Something for Someone</h1>
-                    <form id="submitFormId" onsubmit="Suggest($('#inputEmail').val(), $('#submitTextId').val()); return false;">
+                    <h1 class="h3 mb-2 text-gray-800">Suggest a Public Solution</h1>
+                    <form id="submitFormId" onsubmit="Suggest($('#submitTextId').val()); return false;">
                         <fieldset>
-                            <legend id="solutionHead"><div></div></legend>
+                            <legend id="solutionHead"></legend>
                             <input type="text" name="description" id="submitTextId" placeholder="Suggest a Solution:" required />
                             <input id="submitButtonId" type="submit" value="Submit" />
                         </fieldset>
