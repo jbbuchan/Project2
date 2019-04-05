@@ -227,11 +227,10 @@ function redirect()
     window.location = 'logingpage.html';
 }
 
+
 function LoadTicket(problemId)
 {
-    window.location = 'solve.html';
-
-    var problemDesc;
+    var ticketDesc;
     for (var i = 0; i < publicTickets.length; i++)
     {
         if (problemId == publicTickets[i].problemID)
@@ -240,13 +239,24 @@ function LoadTicket(problemId)
         }
     }
 
-    var problemHead;
-    problemHead = "<div>" + problemId + " | " + problemDesc + "</div>";
-    console.log(problemHead);
+    ticketId = JSON.stringify(problemId);
+    ticketDesc = JSON.stringify(problemDesc);
+
+    localStorage.setItem("ticketId", ticketId);
+    localStorage.setItem("ticketDesc", ticketDesc);
+
+    window.location = 'solve.html';
+}
+
+function LoadTicket2()
+{
+    var ticketId = localStorage.getItem("ticketId");
+    var ticketDesc = localStorage.getItem("ticketDesc");
+
+    var problemHead = "<div>" + ticketId + " | " + ticketDesc + "</div>";
 
     $("#solutionHead").append(problemHead);
-
-    console.log("wait here");
+    console.log(problemHead);
 }
 
 function AdminSolve(problemId)
