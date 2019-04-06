@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccountServices.asmx" />
+    <Content Include="adminSolve.html" />
     <Content Include="dashboard.css" />
     <Content Include="empDashboard.html" />
     <Content Include="adminDashboard.html" />
@@ -102,6 +103,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Solution.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="AccountServices.asmx.cs">
       <DependentUpon>AccountServices.asmx</DependentUpon>

@@ -351,6 +351,46 @@ namespace accountmanager
             }
             sqlConnection.Close();
         }
+
+        [WebMethod(EnableSession = true)]
+        public Solution[] GetSolutions()
+        {
+            if (Session["cust_email"] != null)
+            {
+                DataTable sqlDt = new DataTable("solutions");
+
+                string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+                string sqlSelect = "select * from solutions";
+
+                MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+                MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@currentUser", Session["cust_email"]);
+
+                MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+                //filling the data table
+                sqlDa.Fill(sqlDt);
+
+                List<Solution> solutions = new List<Solution>();
+                for (int i = 0; i < sqlDt.Rows.Count; i++)
+                {
+                    solutions.Add(new Solution
+                    {
+                        solutionId = Convert.ToInt32(sqlDt.Rows[i]["solutionId"]),
+                        problemId = Convert.ToInt32(sqlDt.Rows[i]["problemId"]),
+                        userId = sqlDt.Rows[i]["UserID"].ToString(),
+                        solution = sqlDt.Rows[i]["Priority"].ToString()
+                    });
+                }
+                //convert the list of accounts to an array and return!
+                return solutions.ToArray();
+            }
+            else
+            {
+                //if they're not logged in, return an empty array
+                return new Solution[0];
+            }
+        }
     }
 }
 

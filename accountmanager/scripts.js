@@ -203,6 +203,8 @@ function GetAdminTickets() {
 
                     $("#adminTicketsDiv").append(problem);
                 }
+
+                localStorage.setItem("adminTickets", JSON.stringify(msg.d));
             }
         },
         error: function (e) {
@@ -291,6 +293,67 @@ function Suggest(solution)
 
 function AdminSolve(problemId)
 {
-    //temporary location until we create page for admin to choose solution
-    window.location = '#';
+    //grabs the ticket id and description and stores it using JSON to use on the next page
+    var ticketDesc;
+    for (var i = 0; i < adminTickets.length; i++)
+    {
+        if (problemId == adminTickets[i].problemID)
+        {
+            problemDesc = adminTickets[i].description;
+        }
+    }
+
+    ticketId = JSON.stringify(problemId);
+    ticketDesc = JSON.stringify(problemDesc);
+
+    localStorage.setItem("adminTId", ticketId);
+    localStorage.setItem("adminTdesc", ticketDesc);
+
+    window.location = 'adminSolve.html';
+}
+
+function AdminSolve2()
+{
+    //grabs the info we stored in previous function, diplays for user to see what problem they are solving
+    var ticketId = localStorage.getItem("adminTId");
+    var ticketDesc = localStorage.getItem("adminTdesc");
+
+    var problemHead = ticketId + " | " + ticketDesc;
+
+    $("#solveHead").append(problemHead);
+    console.log(problemHead);
+
+
+    var webMethod = "AccountServices.asmx/GetSolutions";
+    var parameters =
+        "{\"problemId\":\"" + encodeURI(ticketId) + "\"}";
+    console.log(parameters);
+
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        data: parameters,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            console.log(msg);
+            var suggestedSolutions;
+            var allSolutions = msg.d;
+
+            for (i = 0; i < allSolutions.length; i++)
+            {
+                if (allSolutions[i].problemId == ticketId)
+                {
+                    suggestedSolutions.push(allSolutions[i]);
+                }
+            }
+
+            //stopped here, pick up later
+
+        },
+        error: function (e) {
+            alert("Server error");
+        }
+    });
+
 }
