@@ -398,7 +398,8 @@ namespace accountmanager
         {
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
             string sqlSelect = "UPDATE solutions SET chosen = true where solutionId = @solutionId;" +
-                               "UPDATE submittedproblems SET solved = true where problemID = @problemId;";
+                               "UPDATE submittedproblems SET solved = true where problemID = @problemId;" +
+                               "UPDATE submittedproblems SET solutionId = @solutionId where problemID = @problemId;";
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
             MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
