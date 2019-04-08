@@ -196,9 +196,10 @@ function GetAdminTickets() {
             if (msg.d.length > 0) {
                 adminTickets = msg.d;
                 for (var j = 0; j < adminTickets.length; j++) {
-                    problem = "<div class='#'>" +
-                        "<a class='#' href='javascript:AdminSolve(" + adminTickets[j].problemID + ")'>" +
-                        adminTickets[j].problemID + " | " + adminTickets[j].Subject + " | " + adminTickets[j].Priority + " | " + adminTickets[j].UserID + " | " + publicTickets[j].description +
+                    problem = "<div class='ticketsDiv'>" +
+                        "<a class='userTickets' href='javascript:AdminSolve(" + adminTickets[j].problemID + ")'>" +
+                        adminTickets[j].problemID + " | " + adminTickets[j].Subject + " | " + adminTickets[j].Priority + " | " + adminTickets[j].UserID +
+                        " | " + adminTickets[j].description +
                         "</a></div>"
 
                     $("#adminTicketsDiv").append(problem);
@@ -212,24 +213,6 @@ function GetAdminTickets() {
         }
     });
 }
-
-
-function loadDashboard()
-{
-    GetUserTickets();
-    GetPublicTickets();
-}
-
-function loadDashboardAdmin()
-{
-    GetAdminTickets();
-}
-
-function redirect()
-{
-    window.location = 'logingpage.html';
-}
-
 
 function LoadTicket(problemId)
 {
@@ -299,12 +282,12 @@ function AdminSolve(problemId)
     {
         if (problemId == adminTickets[i].problemID)
         {
-            problemDesc = adminTickets[i].description;
+            ticketDesc = adminTickets[i].description;
         }
     }
 
     ticketId = JSON.stringify(problemId);
-    ticketDesc = JSON.stringify(problemDesc);
+    ticketDesc = JSON.stringify(ticketDesc);
 
     localStorage.setItem("adminTId", ticketId);
     localStorage.setItem("adminTdesc", ticketDesc);
@@ -314,7 +297,7 @@ function AdminSolve(problemId)
 
 function AdminSolve2()
 {
-    //grabs the info we stored in previous function, diplays for user to see what problem they are solving
+    //this needs to display the problem info as wel as the suggested solutions
     var ticketId = localStorage.getItem("adminTId");
     var ticketDesc = localStorage.getItem("adminTdesc");
 
@@ -337,7 +320,7 @@ function AdminSolve2()
         dataType: "json",
         success: function (msg) {
             console.log(msg);
-            var suggestedSolutions;
+            var suggestedSolutions = new Array();
             var allSolutions = msg.d;
 
             for (i = 0; i < allSolutions.length; i++)
@@ -348,12 +331,57 @@ function AdminSolve2()
                 }
             }
 
-            //stopped here, pick up later
+            for (i = 0; i < suggestedSolutions.length; i++)
+            {
+                problem = "<div class='solutionsDiv'>" +
+                    "<a class='solutionLink' href='javascript:ChooseSolution(" + suggestedSolutions[i].solutionId + ", " + ticketId + ")'>" +
+                    suggestedSolutions[i].solution + " | " + suggestedSolutions[i].userId +
+                    "</a></div>"
 
+                $("#solutionsDiv").append(problem);
+            }
         },
         error: function (e) {
             alert("Server error");
         }
     });
-
 }
+
+function ChooseSolution(solutionId, problemId) {
+    var webMethod = "AccountServices.asmx/ChooseSolution";
+    var parameters =
+        "{\"problemId\":\"" + encodeURI(problemId) +
+        "\",\"solutionId\":\"" + encodeURI(solutionId) + "\"}";
+    console.log(parameters);
+
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        data: parameters,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            console.log(msg);
+            localStorage.clear();
+            window.location = "./adminDashboard.html";
+        },
+        error: function (e) {
+            alert("Server error");
+        }
+    });
+}
+
+function loadDashboard() {
+    GetUserTickets();
+    GetPublicTickets();
+}
+
+function LoadAdminDashboard() {
+    GetAdminTickets();
+}
+
+function redirect() {
+    window.location = 'logingpage.html';
+}
+
+

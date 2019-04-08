@@ -144,6 +144,7 @@ namespace accountmanager
             }
             sqlConnection.Close();
         }
+
         [WebMethod(EnableSession = true)]
         public Account[] GetAccount()
         {
@@ -285,7 +286,7 @@ namespace accountmanager
                 DataTable sqlDt = new DataTable("submittedproblems");
 
                 string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
-                string sqlSelect = "select * from submittedproblems where privacy = 'public'";
+                string sqlSelect = "select * from submittedproblems where privacy = 'public' and solved = false;";
 
                 MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
                 MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
@@ -325,8 +326,8 @@ namespace accountmanager
         public void Suggest(string problemId, string solution)
         {
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
-            string sqlSelect = "insert into solutions (problemId, solution, user) " +
-                "values(@problemId, @solution, @user); SELECT LAST_INSERT_ID();";
+            string sqlSelect = "insert into solutions (problemId, solution, userId, chosen) " +
+                "values(@problemId, @solution, @user, false); SELECT LAST_INSERT_ID();";
 
             MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
             MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
@@ -378,8 +379,8 @@ namespace accountmanager
                     {
                         solutionId = Convert.ToInt32(sqlDt.Rows[i]["solutionId"]),
                         problemId = Convert.ToInt32(sqlDt.Rows[i]["problemId"]),
-                        userId = sqlDt.Rows[i]["UserID"].ToString(),
-                        solution = sqlDt.Rows[i]["Priority"].ToString()
+                        userId = sqlDt.Rows[i]["userID"].ToString(),
+                        solution = sqlDt.Rows[i]["solution"].ToString()
                     });
                 }
                 //convert the list of accounts to an array and return!
@@ -390,6 +391,32 @@ namespace accountmanager
                 //if they're not logged in, return an empty array
                 return new Solution[0];
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void ChooseSolution(string solutionId, string problemId)
+        {
+            string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+            string sqlSelect = "UPDATE solutions SET chosen = true where solutionId = @solutionId;" +
+                               "UPDATE submittedproblems SET solved = true where problemID = @problemId;";
+
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            sqlCommand.Parameters.AddWithValue("@solutionId", HttpUtility.UrlDecode(solutionId));
+            sqlCommand.Parameters.AddWithValue("@problemId", HttpUtility.UrlDecode(problemId));
+
+            sqlConnection.Open();
+
+            try
+            {
+                int accountID = Convert.ToInt32(sqlCommand.ExecuteScalar());
+            }
+            catch (Exception e)
+            {
+
+            }
+            sqlConnection.Close();
         }
     }
 }

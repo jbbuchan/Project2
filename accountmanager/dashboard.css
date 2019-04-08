@@ -569,10 +569,17 @@ pre {
     overflow: hidden;
     display: block;
     text-overflow: ellipsis;
-    width: 50%;
+    width: 85%;
 }
 
 .ticketsDiv {}
+
+.solutionLink {
+    text-decoration: none;
+    color: black;
+    display: block;
+    width: 85%;
+}
 
 @media (min-width: 576px) {
     .container {
