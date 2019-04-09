@@ -562,25 +562,6 @@ pre {
     margin-left: auto;
 }
 
-.userTickets {
-    text-decoration: none;
-    color: black;
-    white-space: nowrap;
-    overflow: hidden;
-    display: block;
-    text-overflow: ellipsis;
-    width: 85%;
-}
-
-.ticketsDiv {}
-
-.solutionLink {
-    text-decoration: none;
-    color: black;
-    display: block;
-    width: 85%;
-}
-
 @media (min-width: 576px) {
     .container {
         max-width: 540px;
@@ -12932,52 +12913,23 @@ body.sidebar-toggled footer.sticky-footer {
     width: 100%;
 }
 
-#submitFormId {
-    border-radius: 5px;
-    background-color: white;
-    padding: 20px;
-    width: 75%;
-    margin-left: 12%;
-    margin-top: 3%;
+
+.ticketsDiv{
+    margin-top: 0.15rem;
+    border: 1px solid #e3e6f0;
+    border-radius: 0.35rem;
+    max-height: inherit;
+    background-color: #fff;
+    
+}
+.userTickets {
+    max-height: inherit;
 }
 
-#submitTextId, select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    height: 150px;
+#publicTicketsDiv {
+    background-color: lightgray;
+    border-radius: 0.35rem;
+    height: 19.75rem;
+    padding: .15rem;
 }
 
-.submissionBox, select{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    height: 150px;
-}
-
-#selectors {
-    height: auto;
-}
-
-#submitButtonId {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#submitButtonId:hover {
-        background-color: #45a049;
-    }
