@@ -8,14 +8,14 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 
-<body onload="GetProblems()">
+<body>
 
     <header>
         <div id="headerDiv">
             <nav>
                 <ul>
                     <li>
-                      
+
                     </li>
                 </ul>
             </nav>
@@ -26,51 +26,69 @@
         <div id="problemIDdiv">
             <h3>ProblemID</h3>
             <br>
-            <div id="submitproblemsProblemID"></div>
+            <div id="submitproblemsProblemID">
+                Problem ID : <input type="text" id="ProblemIdValue" />
+            </div>
         </div>
 
         <div id="userIDdiv">
             <h3>UserID</h3>
             <br>
-            <div id="submitproblemsUserID"></div>
+            <div id="submitproblemsUserID">
+                User ID : <input type="text" id="UserIdValue">
+            </div>
         </div>
         <div id="priorityDiv">
             <h3>Priority</h3>
             <br>
-            <div id="submitproblemsPriority"></div>
+            <div id="submitproblemsPriority">
+                Priority : <input type="text" id="PriorityValue">
+            </div>
         </div>
 
         <div id="subjectDiv">
             <h3>Subject</h3>
             <br>
-            <div id="submitproblemsSubject"></div>
+            <div id="submitproblemsSubject">
+                Subject : <input type="text" id="SubjectValue">
+            </div>
 
         </div>
 
         <div id="descriptionDiv">
             <h3>Description</h3>
             <br>
-            <div id="submitproblemsDescription"></div>
+            <div id="submitproblemsDescription">
+                Description : <input type="text" id="DescriptionValue">
+            </div>
 
         </div>
 
         <div id="solutionDiv">
             <h3>Solution</h3>
             <br>
-            <div id="submitproblemsSolution"></div>
+            <div id="submitproblemsSolution">
+                Solution : <input type="text" id="SolutionValue">
+            </div>
 
         </div>
 
-        
+
 
     </main>
 
     <footer>
-       
+
 
         <script type="text/javascript" src="scripts.js"></script>
         <script type="text/javascript" src="https://mysqljs.com/mysql.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                detailsLoad();
+            });
+        </script>
 
     </footer>
 </body>

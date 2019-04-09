@@ -137,7 +137,7 @@ function GetUserTickets()
                    for (var j = 0; j < userTickets.length; j++)
                    {
                        problem = "<div class='ticketsDiv'>" +
-                        "<a class='userTickets' href='javascript:LoadTicket(" + userTickets[j].problemID + ")'>" +
+                        "<a class='userTickets' href='javascript:LoadProblemDetail(" + userTickets[j].problemID + ")'>" +
                         userTickets[j].problemID + " | " + userTickets[j].Subject + " | " + userTickets[j].Priority +
                         "</a></div>"
 
@@ -382,6 +382,48 @@ function LoadAdminDashboard() {
 
 function redirect() {
     window.location = 'logingpage.html';
+}
+
+var currentProblem;
+function LoadProblemDetail(problemID) {
+    window.location = './listviewProject2.html?pid=' + problemID;
+
+}
+
+function detailsLoad() {
+    currentProblem = null;
+    problemID = new URLSearchParams(window.location.search).get('pid');
+    var webMethod = "AccountServices.asmx/GetProblems";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            if (msg.d.length > 0) {
+                problemsList = msg.d;
+
+                for (var i = 0; i < problemsList.length; i++) {
+                    if (problemsList[i].problemID == problemID) {
+                        currentProblem = problemsList[i]
+                    }
+                }
+                if (currentProblem != null) {
+                    $('#UserIdValue').val(currentProblem.UserID);
+                    $('#ProblemIdValue').val(currentProblem.problemID);
+                    $('#PriorityValue').val(currentProblem.Priority);
+                    $('#SubjectValue').val(currentProblem.Subject);
+                    $('#DescriptionValue').val(currentProblem.description);
+                    $('#SolutionValue').val(currentProblem.solution);
+
+                }
+            }
+
+        },
+        error: function (e) {
+            alert("server error");
+        }
+    });
 }
 
 
