@@ -182,6 +182,34 @@ function GetPublicTickets() {
     });
 }
 
+var solvedTickets;
+//get public tickets specifically for employee dashboard
+function GetSolvedTickets() {
+    var webMethod = "AccountServices.asmx/GetSolvedTickets";
+    $.ajax({
+        type: "POST",
+        url: webMethod,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            if (msg.d.length > 0) {
+                solvedTickets = msg.d;
+                for (var j = 0; j < solvedTickets.length; j++) {
+                    problem = "<div class='ticketsDiv'>" +
+                        "<a class='userTickets'  >" + solvedTickets[j].description + " | " +
+                        solvedTickets[j].solution +
+                        "</a></div>";
+
+                    $("#solvedTicketsDiv").append(problem);
+                }
+            }
+        },
+        error: function (e) {
+            alert("server error");
+        }
+    });
+}
+
 var adminTickets;
 //get public tickets specifically for employee dashboard
 function GetAdminTickets() {
@@ -374,6 +402,7 @@ function ChooseSolution(solutionId, problemId) {
 function loadDashboard() {
     GetUserTickets();
     GetPublicTickets();
+    GetSolvedTickets();
 }
 
 function LoadAdminDashboard() {

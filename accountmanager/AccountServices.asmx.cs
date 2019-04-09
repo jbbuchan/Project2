@@ -323,6 +323,46 @@ namespace accountmanager
         }
 
         [WebMethod(EnableSession = true)]
+        public SolvedProblems[] GetSolvedTickets()
+        {
+            //WE ONLY SHARE ACCOUNTS WITH LOGGED IN USERS!
+            if (Session["cust_email"] != null)
+            {
+                DataTable sqlDt2 = new DataTable("solvedproblems");
+
+                string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+                string sqlSelect = "select p.description, s.solution,  s.userID from solutions s, submittedproblems p where p.solutionId = s.solutionId and s.chosen = true and p.solved = true and s.userId = '" + Session["cust_email"].ToString() + "';";
+
+                MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+                MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@currentUser", Session["cust_email"]);
+
+                MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+                //filling the data table
+                sqlDa.Fill(sqlDt2);
+
+                List<SolvedProblems> solvedproblems = new List<SolvedProblems>();
+                for (int i = 0; i < sqlDt2.Rows.Count; i++)
+                {
+                    solvedproblems.Add(new SolvedProblems
+                    {
+                        description = sqlDt2.Rows[i]["description"].ToString(),
+                        solution = sqlDt2.Rows[i]["solution"].ToString(),
+                        userID = sqlDt2.Rows[i]["userID"].ToString()
+                    });
+                }
+                //convert the list of accounts to an array and return!
+                return solvedproblems.ToArray();
+            }
+            else
+            {
+                //if they're not logged in, return an empty array
+                return new SolvedProblems[0];
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
         public void Suggest(string problemId, string solution)
         {
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
