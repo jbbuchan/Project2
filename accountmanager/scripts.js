@@ -393,7 +393,7 @@ function LoadProblemDetail(problemID) {
 function detailsLoad() {
     currentProblem = null;
     problemID = new URLSearchParams(window.location.search).get('pid');
-    var webMethod = "AccountServices.asmx/GetProblems";
+    var webMethod = "AccountServices.asmx/GetUserTickets";
     $.ajax({
         type: "POST",
         url: webMethod,
@@ -418,7 +418,6 @@ function detailsLoad() {
 
                 }
             }
-
         },
         error: function (e) {
             alert("server error");
