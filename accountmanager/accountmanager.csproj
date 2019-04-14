@@ -94,6 +94,7 @@
     <Content Include="listViewProject2CSS.css" />
     <Content Include="logincss.css" />
     <Content Include="logingpage.html" />
+    <Content Include="revenue.png" />
     <Content Include="scripts.js" />
     <Content Include="solve.html" />
     <Content Include="SubmissionPage.html" />
