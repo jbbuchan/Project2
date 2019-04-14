@@ -39,14 +39,14 @@ function LogOff() {
         dataType: "json",
         success: function (msg) {
             if (msg.d) {
-                window.location = "./loginpage.html";
+                window.location = "./logingpage.html";
             }
             else {
                 alert("failed");
             }
         },
         error: function (e) {
-            alert("boo...");
+            alert("Server Error");
         }
     });
 }
