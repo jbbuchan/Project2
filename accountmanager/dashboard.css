@@ -12921,9 +12921,11 @@ body.sidebar-toggled footer.sticky-footer {
     max-height: inherit;
     background-color: #fff;
     
+    
 }
 .userTickets {
     max-height: inherit;
+    font-weight: bold;
 }
 
 #publicTicketsDiv {
