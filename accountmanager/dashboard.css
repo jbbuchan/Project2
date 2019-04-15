@@ -12984,3 +12984,7 @@ body.sidebar-toggled footer.sticky-footer {
     #submitButtonId:hover {
         background-color: #45a049;
     }
+
+.revenueimg {
+    padding: 1.25rem;
+}
