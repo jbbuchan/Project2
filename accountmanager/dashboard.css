@@ -12926,6 +12926,7 @@ body.sidebar-toggled footer.sticky-footer {
 .userTickets {
     max-height: inherit;
     font-weight: bold;
+    color: orangered;
 }
 
 #publicTicketsDiv {
@@ -12985,6 +12986,3 @@ body.sidebar-toggled footer.sticky-footer {
         background-color: #45a049;
     }
 
-.revenueimg {
-    padding: 1.25rem;
-}
