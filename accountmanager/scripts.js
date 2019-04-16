@@ -414,6 +414,36 @@ function redirect() {
     window.location = 'logingpage.html';
 }
 
+//var companywidesolvedTickets;
+////get public tickets specifically for employee dashboard
+//function GetCompanyWideSolvedTickets() {
+//	var webMethod = "AccountServices.asmx/GetCompanyWideSolvedTickets";
+//	var problem2;
+//	$.ajax({
+//		type: "POST",
+//		url: webMethod,
+//		contentType: "application/json; charset=utf-8",
+//		dataType: "json",
+//		success: function (msg) {
+//			if (msg.d.length > 0) {
+//				companywidesolvedTickets = msg.d;
+//				for (var j = 0; j < companywidesolvedTickets.length; j++) {
+//					problem2 = "<div class='ticketsDiv2'>" +
+//						"<a class='userTickets2'  >" + companywidesolvedTickets[j].userID + " | " +
+//						companywidesolvedTickets[j].description +
+//						"</a></div>";
+
+//					$("#companywidesolvedTicketsDiv").append(problem2);
+//				}
+//			}
+//		},
+//		error: function (e) {
+//			alert("server error");
+
+//		}
+//	});
+//}
+
 var companywidesolvedTickets;
 //get public tickets specifically for employee dashboard
 function GetCompanyWideSolvedTickets() {
@@ -429,38 +459,8 @@ function GetCompanyWideSolvedTickets() {
 				companywidesolvedTickets = msg.d;
 				for (var j = 0; j < companywidesolvedTickets.length; j++) {
 					problem2 = "<div class='ticketsDiv2'>" +
-						"<a class='userTickets2'  >" + companywidesolvedTickets[j].description + " | " +
-						companywidesolvedTickets[j].solution +
-						"</a></div>";
-
-					$("#companywidesolvedTicketsDiv").append(problem2);
-				}
-			}
-		},
-		error: function (e) {
-			alert("server error");
-
-		}
-	});
-}
-
-var companywidesolvedTickets;
-//get public tickets specifically for employee dashboard
-function GetCompanyWideSolvedTickets() {
-	var webMethod = "AccountServices.asmx/GetCompanyWideSolvedTickets";
-	var problem2;
-	$.ajax({
-		type: "POST",
-		url: webMethod,
-		contentType: "application/json; charset=utf-8",
-		dataType: "json",
-		success: function (msg) {
-			if (msg.d.length > 0) {
-				companywidesolvedTickets = msg.d;
-				for (var j = 0; j < companywidesolvedTickets.length; j++) {
-					problem2 = "<div class='ticketsDiv2'>" +
-						"<a class='userTickets2'  >" + companywidesolvedTickets[j].description + " | " +
-						companywidesolvedTickets[j].solution +
+						"<a class='userTickets2'  >" + companywidesolvedTickets[j].userID + " | " +
+						companywidesolvedTickets[j].description +
 						"</a></div>";
 
 					$("#companywidesolvedTicketsDiv").append(problem2);
