@@ -161,14 +161,14 @@ sup {
 }
 
 a {
-    color: #4e73df;
+    color: black;
     text-decoration: none;
     background-color: transparent;
 }
 
     a:hover {
         color: #224abe;
-        text-decoration: underline;
+        text-decoration: none;
     }
 
     a:not([href]):not([tabindex]) {
@@ -12920,17 +12920,24 @@ body.sidebar-toggled footer.sticky-footer {
     border-radius: 0.35rem;
     max-height: inherit;
     background-color: #fff;
-    
-    
 }
+
+.ticketsDiv2 {
+    margin-top: 0.15rem;
+    border: 1px solid #e3e6f0;
+    border-radius: 0.35rem;
+    max-height: inherit;
+    background-color: #fff;
+}
+
 .userTickets {
     max-height: inherit;
-    font-weight: bold;
+    /*font-weight: bold;*/
     
 }
 
 #publicTicketsDiv {
-    background-color: lightgray;
+    /*background-color: lightgray;*/
     border-radius: 0.35rem;
     height: 19.75rem;
     padding: .15rem;

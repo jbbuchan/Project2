@@ -460,7 +460,7 @@ function GetCompanyWideSolvedTickets() {
 				for (var j = 0; j < companywidesolvedTickets.length; j++) {
 					problem2 = "<div class='ticketsDiv2'>" +
 						"<a class='userTickets2'  >" + companywidesolvedTickets[j].userID + " | " +
-						companywidesolvedTickets[j].description +
+						companywidesolvedTickets[j].description + " | " + companywidesolvedTickets[j].solution +
 						"</a></div>";
 
 					$("#companywidesolvedTicketsDiv").append(problem2);

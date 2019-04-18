@@ -470,7 +470,7 @@ namespace accountmanager
 
                 string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
                 // string sqlSelect = "select p.description, s.solution,  s.userID from solutions s, submittedproblems p where p.solutionId = s.solutionId and s.chosen = true and p.solved = true and s.userId = '" + Session["cust_email"].ToString() + "';";
-                string sqlSelect = "select p.description, p.UserID from submittedproblems p where p.solved = 1";
+                string sqlSelect = "SELECT p.description, p.UserID, s.solution FROM submittedproblems p, solutions s WHERE p.solutionId = s.solutionId AND p.solved = 1; ";
                 //string sqlSelect = "select p.UserID, p.description from submittedproblems p where p.solved = 1";
                 MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
                 MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
@@ -488,7 +488,7 @@ namespace accountmanager
                     {
                         userID = sqlDt2.Rows[i]["userID"].ToString(),
                         description = sqlDt2.Rows[i]["description"].ToString(),
-                        //solution = sqlDt2.Rows[i]["solution"].ToString()
+                        solution = sqlDt2.Rows[i]["solution"].ToString()
                         
                     });
                 }
