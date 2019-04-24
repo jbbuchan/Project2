@@ -138,7 +138,7 @@ function GetUserTickets()
                    {
                        problem = "<div class='ticketsDiv'>" +
                         "<a class='userTickets' href='javascript:LoadProblemDetail(" + userTickets[j].problemID + ")'>" +
-                        userTickets[j].problemID + " | " + userTickets[j].Subject + " | " + userTickets[j].Priority +
+                        userTickets[j].Subject + " | " + userTickets[j].Priority +
                         "</a></div>"
 
                         $("#openTicketsDiv").append(problem);
@@ -168,7 +168,7 @@ function GetPublicTickets() {
                 {
                     problem = "<div class='ticketsDiv'>" +
                     "<a class='userTickets' href='javascript:LoadTicket(" + publicTickets[j].problemID + ")'>" +
-                        publicTickets[j].problemID + " | " + publicTickets[j].Subject + " | " + publicTickets[j].Priority +
+                        publicTickets[j].Subject + " | " + publicTickets[j].Priority +
                         " | " + publicTickets[j].description +
                     "</a></div>"
 
@@ -226,7 +226,7 @@ function GetAdminTickets() {
                 for (var j = 0; j < adminTickets.length; j++) {
                     problem = "<div class='ticketsDiv'>" +
                         "<a class='userTickets' href='javascript:AdminSolve(" + adminTickets[j].problemID + ")'>" +
-                        adminTickets[j].problemID + " | " + adminTickets[j].Subject + " | " + adminTickets[j].Priority + " | " + adminTickets[j].UserID +
+                        adminTickets[j].Subject + " | " + adminTickets[j].Priority + " | " + adminTickets[j].UserID +
                         " | " + adminTickets[j].description +
                         "</a></div>"
 
