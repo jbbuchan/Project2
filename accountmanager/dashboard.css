@@ -12920,6 +12920,28 @@ body.sidebar-toggled footer.sticky-footer {
     border-radius: 0.35rem;
     max-height: inherit;
     background-color: #fff;
+    padding: .35rem;
+}
+
+.spanner1
+{
+    font-weight: normal;
+}
+.spanner2
+{
+    font-style: italic;
+    color: gray;
+    font-size: small;
+}
+.spanner3
+{
+    color: deepskyblue;
+}
+.spanner4
+{
+    color: goldenrod;
+    font-style: italic;
+    font-size: small;
 }
 
 .ticketsDiv2 {

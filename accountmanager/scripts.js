@@ -137,9 +137,9 @@ function GetUserTickets()
                    for (var j = 0; j < userTickets.length; j++)
                    {
                        problem = "<div class='ticketsDiv'>" +
-                        "<a class='userTickets' href='javascript:LoadProblemDetail(" + userTickets[j].problemID + ")'>" +
-                        userTickets[j].Subject + " | " + userTickets[j].Priority +
-                        "</a></div>"
+                           "<a class='userTickets' href='javascript:LoadProblemDetail(" + userTickets[j].problemID + ")'><span class='spanner1'>" +
+                           userTickets[j].description + "</span> <span class='spanner2'>" + userTickets[j].Priority + " : " + userTickets[j].Subject +
+                        "</span></a></div>"
 
                         $("#openTicketsDiv").append(problem);
                     }
@@ -167,10 +167,10 @@ function GetPublicTickets() {
                 for (var j = 0; j < publicTickets.length; j++)
                 {
                     problem = "<div class='ticketsDiv'>" +
-                    "<a class='userTickets' href='javascript:LoadTicket(" + publicTickets[j].problemID + ")'>" +
-                        publicTickets[j].Subject + " | " + publicTickets[j].Priority +
-                        " | " + publicTickets[j].description +
-                    "</a></div>"
+                    "<a class='userTickets' href='javascript:LoadTicket(" + publicTickets[j].problemID + ")'><span class='spanner1'>" +
+                        publicTickets[j].description + "</span><span class='spanner2'> " + publicTickets[j].Priority +
+                        " : " + publicTickets[j].Subject +
+                    "</span></a></div>"
 
                     $("#publicTicketsDiv").append(problem);      
                 }
@@ -196,9 +196,9 @@ function GetSolvedTickets() {
                 solvedTickets = msg.d;
                 for (var j = 0; j < solvedTickets.length; j++) {
                     problem = "<div class='ticketsDiv'>" +
-                        "<a class='userTickets'  >" + solvedTickets[j].description + " | " +
+                        "<a class='userTickets'>" + solvedTickets[j].description + "<span class='spanner3'> " +
                         solvedTickets[j].solution +
-                        "</a></div>";
+                        "</span></a></div>";
 
                     $("#solvedTicketsDiv").append(problem);
                 }
@@ -459,9 +459,9 @@ function GetCompanyWideSolvedTickets() {
 				companywidesolvedTickets = msg.d;
 				for (var j = 0; j < companywidesolvedTickets.length; j++) {
 					problem2 = "<div class='ticketsDiv2'>" +
-						"<a class='userTickets2'  >" + companywidesolvedTickets[j].userID + " | " +
-						companywidesolvedTickets[j].description + " | " + companywidesolvedTickets[j].solution +
-						"</a></div>";
+						"<a class='userTickets2'><span class='spanner1'>" + companywidesolvedTickets[j].description + "<br></span> <span class='spanner3'>" +
+						companywidesolvedTickets[j].solution + "</span> <span class='spanner4'> -" + companywidesolvedTickets[j].userID +
+						"</span></a></div>";
 
 					$("#companywidesolvedTicketsDiv").append(problem2);
 				}
