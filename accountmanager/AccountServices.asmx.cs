@@ -262,9 +262,9 @@ namespace accountmanager
                         Priority = sqlDt.Rows[i]["Priority"].ToString(),
                         Subject = sqlDt.Rows[i]["Subject"].ToString(),
                         description = sqlDt.Rows[i]["description"].ToString(),
+                        privacy = sqlDt.Rows[i]["privacy"].ToString(),
                         solution = sqlDt.Rows[i]["solution"].ToString(),
                         Solved = Convert.ToBoolean(sqlDt.Rows[i]["Solved"])
-
                     });
                 }
                 //convert the list of accounts to an array and return!

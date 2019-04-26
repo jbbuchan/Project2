@@ -9,6 +9,7 @@ namespace accountmanager
     {
         public int problemID;
         public string UserID;
+        public string privacy;
         public string Priority;
         public string Subject;
         public string description;

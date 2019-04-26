@@ -133,15 +133,21 @@ function GetUserTickets()
                {
                   userTickets = msg.d;
                    var problem;
-         
+
                    for (var j = 0; j < userTickets.length; j++)
                    {
-                       problem = "<div class='ticketsDiv'>" +
-                           "<a class='userTickets' href='javascript:LoadProblemDetail(" + userTickets[j].problemID + ")'><span class='spanner1'>" +
-                           userTickets[j].description + "</span> <span class='spanner2'>" + userTickets[j].Priority + " : " + userTickets[j].Subject +
-                        "</span></a></div>"
+                       if (userTickets[j].Solved == false)
+                       {
+                           var private = "";
+                           if (userTickets[j].privacy == "private") { private = userTickets[j].privacy; }
+                           problem = "<div class='ticketsDiv'>" +
+                               "<a class='userTickets' href='javascript:LoadProblemDetail(" + userTickets[j].problemID + ")'><span class='spanner1'>" +
+                               userTickets[j].description + "</span> <span class='spanner2'>" + userTickets[j].Priority + " : " + userTickets[j].Subject + "</span> <span class='spannerpriv'>" + private +
+                               "</span></a></div>"
 
-                        $("#openTicketsDiv").append(problem);
+                           $("#openTicketsDiv").append(problem);
+                       }
+
                     }
                 }
 			},
@@ -211,7 +217,7 @@ function GetSolvedTickets() {
 }
 
 var adminTickets;
-//get public tickets specifically for employee dashboard
+//get public tickets specifically for admin dashboard
 function GetAdminTickets() {
     var webMethod = "AccountServices.asmx/GetPublicTickets";
     //using same service as GetPublicTickets since it will be the same results. We will construct them as links differently below

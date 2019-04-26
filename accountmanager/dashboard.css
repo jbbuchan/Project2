@@ -12962,6 +12962,13 @@ body.sidebar-toggled footer.sticky-footer {
 {
     color: deepskyblue;
 }
+.spannerpriv 
+{
+    color: red;
+    font-style: italic;
+    text-decoration: underline;
+    font-size: small;
+}
 
 .ticketsDiv2 {
     margin-top: 0.15rem;
