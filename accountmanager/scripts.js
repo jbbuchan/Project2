@@ -196,7 +196,7 @@ function GetSolvedTickets() {
                 solvedTickets = msg.d;
                 for (var j = 0; j < solvedTickets.length; j++) {
                     problem = "<div class='ticketsDiv'>" +
-                        "<a class='userTickets'>" + solvedTickets[j].description + "<span class='spanner3'> " +
+                        "<a class='userTickets'>" + solvedTickets[j].description + "<span class='spanner5'> " +
                         solvedTickets[j].solution +
                         "</span></a></div>";
 
@@ -225,10 +225,10 @@ function GetAdminTickets() {
                 adminTickets = msg.d;
                 for (var j = 0; j < adminTickets.length; j++) {
                     problem = "<div class='ticketsDiv'>" +
-                        "<a class='userTickets' href='javascript:AdminSolve(" + adminTickets[j].problemID + ")'>" +
-                        adminTickets[j].Subject + " | " + adminTickets[j].Priority + " | " + adminTickets[j].UserID +
-                        " | " + adminTickets[j].description +
-                        "</a></div>"
+                        "<a class='userTickets' href='javascript:AdminSolve(" + adminTickets[j].problemID + ")'><span class='spanner1'>" +
+                        adminTickets[j].description + "</span>  <span class='spanner2'>" + adminTickets[j].Priority + " : " + adminTickets[j].Subject +
+                        "</span> &nbsp <span class='spanner3'>" + adminTickets[j].UserID +
+                        "</span></a></div>"
 
                     $("#adminTicketsDiv").append(problem);
                 }
@@ -269,7 +269,7 @@ function LoadTicket2()
     var ticketId = localStorage.getItem("ticketId");
     var ticketDesc = localStorage.getItem("ticketDesc");
 
-    var problemHead = ticketId + " | " + ticketDesc;
+    var problemHead = ticketDesc;
 
     $("#solutionHead").append(problemHead);
     console.log(problemHead);
@@ -329,7 +329,7 @@ function AdminSolve2()
     var ticketId = localStorage.getItem("adminTId");
     var ticketDesc = localStorage.getItem("adminTdesc");
 
-    var problemHead = ticketId + " | " + ticketDesc;
+    var problemHead = ticketDesc;
 
     $("#solveHead").append(problemHead);
     console.log(problemHead);
@@ -363,8 +363,8 @@ function AdminSolve2()
             {
                 problem = "<div class='solutionsDiv'>" +
                     "<a class='solutionLink' href='javascript:ChooseSolution(" + suggestedSolutions[i].solutionId + ", " + ticketId + ")'>" +
-                    suggestedSolutions[i].solution + " | " + suggestedSolutions[i].userId +
-                    "</a></div>"
+                    suggestedSolutions[i].solution + " &nbsp<span class='spanner3'>" + suggestedSolutions[i].userId +
+                    "</span></a></div>"
 
                 $("#solutionsDiv").append(problem);
             }
@@ -459,8 +459,8 @@ function GetCompanyWideSolvedTickets() {
 				companywidesolvedTickets = msg.d;
 				for (var j = 0; j < companywidesolvedTickets.length; j++) {
 					problem2 = "<div class='ticketsDiv2'>" +
-						"<a class='userTickets2'><span class='spanner1'>" + companywidesolvedTickets[j].description + "<br></span> <span class='spanner3'>" +
-						companywidesolvedTickets[j].solution + "</span> <span class='spanner4'> -" + companywidesolvedTickets[j].userID +
+						"<a class='userTickets2'><span class='spanner1'>" + companywidesolvedTickets[j].description + "<br></span> <span class='spanner5'>" +
+						companywidesolvedTickets[j].solution + "</span> <span class='spanner4'>" + companywidesolvedTickets[j].userID +
 						"</span></a></div>";
 
 					$("#companywidesolvedTicketsDiv").append(problem2);

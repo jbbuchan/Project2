@@ -316,6 +316,19 @@ fieldset {
     border: 0;
 }
 
+.fieldsetstyle 
+{
+    border: 1px solid black;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 50%;
+}
+
 legend {
     display: block;
     width: 100%;
@@ -8750,10 +8763,10 @@ button.bg-dark:focus {
     box-shadow: 0 0.125rem 0.25rem 0 rgba(58, 59, 69, 0.2) !important;
 }
 
-.shadow {
+/*.shadow {
     -webkit-box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
     box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
-}
+}*/
 
 .shadow-lg {
     -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
@@ -12935,13 +12948,19 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .spanner3
 {
-    color: deepskyblue;
+    font-size: small;
+    color: darkgoldenrod;
+    font-style: italic;
 }
 .spanner4
 {
     color: grey;
     font-style: italic;
     font-size: small;
+}
+.spanner5
+{
+    color: deepskyblue;
 }
 
 .ticketsDiv2 {
@@ -12950,6 +12969,17 @@ body.sidebar-toggled footer.sticky-footer {
     border-radius: 0.35rem;
     max-height: inherit;
     background-color: #fff;
+    padding: .35rem;
+}
+
+.solutionsDiv 
+{
+    margin-top: 0.15rem;
+    border: 1px solid #e3e6f0;
+    border-radius: 0.35rem;
+    max-height: inherit;
+    background-color: #fff;
+    padding: .35rem;
 }
 
 .userTickets {
@@ -12982,7 +13012,7 @@ body.sidebar-toggled footer.sticky-footer {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    height: 150px;
+    height: 100px;
 }
 
 .submissionBox, select {
@@ -12993,11 +13023,23 @@ body.sidebar-toggled footer.sticky-footer {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    height: 150px;
+    height: 50%;
 }
 
 #selectors {
     height: auto;
+}
+
+#severitySelectors
+{
+    width: 100%;
+    height: 50%;
+}
+
+#subjectSelector 
+{
+    width: 100%;
+    height: 50%;
 }
 
 #submitButtonId {

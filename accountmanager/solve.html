@@ -289,8 +289,8 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href='javascript:LogOff()' id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span id="logged-in-user"></span></span>
-                                <img class="img-profile rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span id="logged-in-user"></span></span>Log Out
+                                <!--<img class="img-profile rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">-->
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -322,11 +322,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Suggest a Public Solution</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Suggest a Solution</h1>
                     <form id="submitFormId" onsubmit="Suggest($('#submitTextId').val()); return false;">
                         <fieldset>
                             <legend id="solutionHead"></legend>
-                            <input type="text" name="description" id="submitTextId" placeholder="Suggest a Solution:" required />
+                            <!--<input type="text" name="description" id="submitTextId" placeholder="Suggest a Solution:" required />-->
+                            <textarea rows="4" cols="50" name="description" id="submitTextId" placeholder="Suggest a Solution:" required></textarea>
                             <input id="submitButtonId" type="submit" value="Submit" />
                         </fieldset>
                     </form>

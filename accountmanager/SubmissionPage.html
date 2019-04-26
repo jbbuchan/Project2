@@ -286,8 +286,8 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href='javascript:LogOff()' id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span id="logged-in-user"></span></span>
-                                <img class="img-profile rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span id="logged-in-user"></span></span>Log Out
+                                <!--<img class="img-profile rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">-->
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -326,13 +326,13 @@
                             <legend>
                                 How can we help you today?
                             </legend>
-                            <p>Severity: </p><select name="severity" id="severitySelectors">
+                            <h6>Severity</h6><select name="severity" id="severitySelectors">
                                 <option value="Low">Low</option>
                                 <option value="Medium">Medium</option>
                                 <option value="High">High</option>
                                 <option value="Critical">Critical</option>
                             </select>
-                            <p>Subject: </p><select name="subject" id="subjectSelector">
+                            <h6>Subject</h6><select name="subject" id="subjectSelector">
                                 <option value="General">General</option>
                                 <option value="Building Ops">Building Ops</option>
                                 <option value="Office Area">Office Area</option>
@@ -340,10 +340,15 @@
                                 <option value="Personal">Personal</option>
                                 <option value="Other">Other</option>
                             </select>
-                            <input type="text" name="description" class="submissionBox" id="descriptionText" placeholder="Describe here..." required />
-                            <input type="text" name="solution" class="submissionBox" id="solutionText" placeholder="What is a possible solution?" required />
-                            <input type="radio" class="privacy" name="privacy" value="private"> Private <br>
-                            <input type="radio" class="privacy" name="privacy" value="public"> Public <br>
+                            <!--<input type="text" name="description" class="submissionBox" id="descriptionText" placeholder="Describe here..." required />-->
+                            <textarea rows="4" cols="50" name="description" class="submissionBox" id="descriptionText" placeholder="Describe here..." required></textarea>
+                            <!--<input type="text" name="solution" class="submissionBox" id="solutionText" placeholder="What is a possible solution?" required />-->
+                            <textarea rows="4" cols="50" name="solution" class="submissionBox" id="solutionText" placeholder="What is a possible solution?" required></textarea>
+                            <h6>Privacy</h6>
+                            <fieldset class="fieldsetstyle">
+                                <input type="radio" class="privacy" name="privacy" value="private"> Private <br>
+                                <input type="radio" class="privacy" name="privacy" value="public"> Public <br>
+                            </fieldset>
                             <input id="submitButtonId" type="submit" value="Submit">
                         </fieldset>
                     </form>
